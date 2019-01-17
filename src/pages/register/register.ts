@@ -5,14 +5,14 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
-
+import { PasswordValidation } from './../../validation/passwordConform'
 @IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  register:FormGroup;
+  register: FormGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.formInit();
   }
@@ -24,10 +24,11 @@ export class RegisterPage {
       conformPassword: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required]),
       userName: new FormControl("", [Validators.required])
-    });
+    }, PasswordValidation.MatchPassword);
+
   }
 
   registerForm(formData) {
     console.log(formData.value)
- }
+  }
 }
