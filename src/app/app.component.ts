@@ -33,7 +33,12 @@ export class MyApp {
       this.checkBackButton();
     });
     if (this.platform.is('cordova')) {
-      this._dbInit.openDb();
+      this._dbInit.openDb().then((res) => {
+        console.log("res", res)
+        this._dbInit.createTables();
+      }, (err) => {
+        console.log("err")
+      })
     }
   }
 

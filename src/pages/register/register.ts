@@ -48,7 +48,7 @@ export class RegisterPage {
       this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude, options)
         .then((result: NativeGeocoderReverseResult[]) => {
           console.log(JSON.stringify(result[0]))
-          const location = `${result[0].subAdministrativeArea} ${result[0].subLocality} ${result[0].locality} ${result[0].administrativeArea} ${result[0].countryName}`
+          const location = `${result[0].subAdministrativeArea} ${result[0].subLocality} ${result[0].locality} ${result[0].administrativeArea} ${result[0].countryName} ${result[0].postalCode}`
           this.register.patchValue({ 'location': location })
         })
         .catch((error: any) => console.log(error));
