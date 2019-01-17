@@ -1,0 +1,58 @@
+page-register,page-login {
+  .title {
+    padding: 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    background: #cecccc;
+    .label {
+      margin: 0px;
+      margin-left: 15px;
+    }
+  }
+  ion-input {
+    border: 1px solid #888888;
+    border-radius: 12px;
+  }
+
+  ion-input {
+    background: white;
+  }
+  .title .label-ios {
+    margin: 22px 0px 6px 0px;
+    margin-left: 15px;
+  }
+  .underLine {
+    text-decoration: underline;
+    font-size: 17px;
+    color: #4457e5;
+  }
+   ion-thumbnail, ion-thumbnail img {
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    min-height: 50px !important;
+}
+.helpTitle{
+  background: #cecccc;
+  color: white;
+  p{
+    color: white;
+  }
+}
+.checkbox .checkbox-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+.checkbox .checkbox-checked .checkbox-inner {
+  left: 8px;
+  top: 0;
+  position: absolute;
+  width: 5px;
+  height: 14px;
+}
+.image{
+  width: 100%;
+  min-height: 200px;
+}
+}

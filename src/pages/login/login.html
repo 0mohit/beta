@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar color="white">
+    <img class="headerImg" src="/assets/imgs/vCareLogo.jpg" alt="">
+    <img class="headerImg" padding-right float-right src="/assets/imgs/BetaMedTech_Logo.jpg" alt="">
+    <div class="border-header"></div>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="loginForm">
+    <ion-list no-margin class="backgroung-skyBlue" no-lines>
+      <ion-list-header class="title">
+        Sign-In
+      </ion-list-header>
+
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input formControlName="userName" type="text" (keyup)="removeSpace('userName')" placeholder="User Name"></ion-input>
+      </ion-item>
+      <div padding margin-left class="red" *ngIf="!loginForm.controls.userName.valid && loginForm.controls.userName.dirty">
+        User Name is required.
+      </div>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input formControlName="password" type="password" (keyup)="removeSpace('password')" placeholder="Password"></ion-input>
+      </ion-item>
+      <div padding margin-left class="red" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
+        Password is required.
+      </div>
+      <ion-item no-lines class="borderLocation margin-botton-five" (click)="logInForm(loginForm)" no-padding>
+        <span float-right class="theamColor">Sign-In
+          <ion-icon class="iconAuth theamColor" name="ios-arrow-dropright-circle-outline"></ion-icon>
+        </span>
+      </ion-item>
+      <ion-item no-lines class="borderLocation margin-botton-five" (click)="signUp()" no-padding>
+        <span float-right class="theamColor">Sign-Up
+          <ion-icon class="iconAuth theamColor" name="ios-arrow-dropright-circle-outline"></ion-icon>
+        </span>
+      </ion-item>
+      <ion-item no-lines class="borderLocation margin-botton-five" no-padding>
+        <span float-right class="theamColor">Forgot Password
+          <ion-icon class="iconAuth theamColor" name="ios-arrow-dropright-circle-outline"></ion-icon>
+        </span>
+      </ion-item>
+    </ion-list>
+  </form>
+  <img class="image" src="assets/imgs/PressureUlcer.jpeg" alt="">
+  <ion-list>
+    <ion-item class="helpTitle">
+      <ion-thumbnail item-start>
+        <img src="img/thumbnail-totoro.png">
+      </ion-thumbnail>
+      <h2>Help</h2>
+      <p>User Manual</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="theam">
+    <p class="text">
+      For help, reach out to ...
+    </p>
+    <div> <span class="underLine">www.betamedtech.com</span>
+      <div float-right class="text">Phone:1234567890</div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

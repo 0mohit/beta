@@ -1,0 +1,75 @@
+
+<ion-header>
+
+  <ion-navbar color="white">
+    <img class="headerImg" src="/assets/imgs/vCareLogo.jpg" alt="">
+    <img class="headerImg" padding-right float-right
+      src="/assets/imgs/BetaMedTech_Logo.jpg" alt="">
+    <div class="border-header"></div>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="register">
+    <ion-list no-margin class="backgroung-skyBlue" no-lines>
+      <ion-list-header class="title">
+        Sign-Up
+      </ion-list-header>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="text" formControlName="careProviderName" placeholder="Care Provider Name"></ion-input>
+      </ion-item>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="text" formControlName="physicinName" placeholder="Physicin Name"></ion-input>
+      </ion-item>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="number" formControlName="mobile" placeholder="Mobile"></ion-input>
+      </ion-item>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="text" formControlName="userName" placeholder="User Name"></ion-input>
+      </ion-item>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
+      </ion-item>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="text" formControlName="conformPassword" placeholder="Confirm Password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item margin-top class="borderLocation" no-padding>
+        Location
+        <ion-icon class="iconAuth" name="ios-locate-outline"></ion-icon>
+        <span float-right class="theamColor" (click)="registerForm(register)" >Sign-Up
+          <ion-icon class="iconAuth theamColor"
+            name="ios-arrow-dropright-circle-outline"></ion-icon>
+        </span>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item no-lines no-padding>
+        <ion-label>Daenerys Targaryen</ion-label>
+        <ion-checkbox color="dark" checked="true"></ion-checkbox>
+      </ion-item>
+      <ion-item class="helpTitle">
+        <ion-thumbnail item-start>
+          <img src="img/thumbnail-totoro.png">
+        </ion-thumbnail>
+        <h2>Help</h2>
+        <p>User Manual</p>
+      </ion-item>
+    </ion-list>
+  </form>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="theam">
+    <p class="text">
+      For help, reach out to ...
+    </p>
+    <div> <span class="underLine">www.betamedtech.com</span>
+      <div float-right class="text">Phone:1234567890</div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
