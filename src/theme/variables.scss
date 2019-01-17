@@ -71,6 +71,10 @@ $colors: (
 @import "roboto";
 @import "noto-sans";
 
+.footer .toolbar{
+  padding: 0px 10px 5px;
+}
+
 .text{
   font-size: 17px;
   font-weight: bold;
@@ -85,6 +89,11 @@ $colors: (
 }
 .backgroung-skyBlue {
   background: #49c2f3;
+}
+
+.backgroung-skyBlue.item{
+  background: #49c2f3 !important;
+
 }
 .margin-botton-five {
   padding-bottom: 7px !important;
@@ -113,7 +122,7 @@ $colors: (
   color: gray;
 }
 .theamColor {
-  color: #4457e5;
+  color: #4457e5!important;
 }
 .underLine {
   text-decoration: underline;

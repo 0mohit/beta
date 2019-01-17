@@ -1,18 +1,73 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>profile</ion-title>
+  <ion-navbar color="white">
+    <img class="headerImg" src="/assets/imgs/vCareLogo.jpg" alt="">
+    <img class="headerImg" padding-right float-right src="/assets/imgs/BetaMedTech_Logo.jpg" alt="">
   </ion-navbar>
+  <div class="border-header"></div>
 
 </ion-header>
 
 
-<ion-content padding>
 
+<ion-content>
+  <ion-item no-lines class="marginTop margin-botton-five">
+    <div>
+      <span>Name : ****</span>
+      <span float-right>Gender : ****</span>
+    </div>
+    <div class="clear">
+      <span>Age : ****</span>
+      <span float-right>Weight : ****</span>
+    </div>
+    <div class="clear">
+      Location
+    </div>
+  </ion-item>
+  <ion-list-header class="theamColor" no-margin> Sensoor Readings </ion-list-header>
+  <div class="border-header"></div>
+  <ion-item no-lines class="marginTop margin-botton-five">
+    <div>
+      <span>Temperature : ****</span>
+      <span float-right>Moisture : ****</span>
+    </div>
+    <div class="clear">
+      <span>Moisture : ****</span>
+      <span float-right>
+        <button ion-button>Default</button>
+      </span>
+    </div>
+  </ion-item>
+  <ion-list-header class="theamColor" no-margin> Skin condition </ion-list-header>
+  <div class="border-header"></div>
+  <ion-item no-lines class="marginTop margin-botton-five">
+    <div>
+      <span (click)="mediaActionSheet()">Take Photo ****</span>
+      <span float-right>View Photo</span>
+    </div>
+    <div class="clear"></div>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          Skin condition
+        </ion-col>
+        <ion-col col-9>
+          <ion-item class="backgroung-skyBlue">
+            <ion-range no-padding [(ngModel)]="brightness">
+            </ion-range>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="theam">
+    <p class="text">
+      For help, reach out to ...
+    </p>
+    <div> <span class="underLine">www.betamedtech.com</span>
+      <div float-right class="text">Phone:1234567890</div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

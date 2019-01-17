@@ -1,10 +1,8 @@
-
 <ion-header>
 
   <ion-navbar color="white">
     <img class="headerImg" src="/assets/imgs/vCareLogo.jpg" alt="">
-    <img class="headerImg" padding-right float-right
-      src="/assets/imgs/BetaMedTech_Logo.jpg" alt="">
+    <img class="headerImg" padding-right float-right src="/assets/imgs/BetaMedTech_Logo.jpg" alt="">
     <div class="border-header"></div>
   </ion-navbar>
 
@@ -33,16 +31,17 @@
         <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
       </ion-item>
       <ion-item class="margin-botton-five" no-lines>
-        <ion-input type="text" formControlName="conformPassword" placeholder="Confirm Password"></ion-input>
+        <ion-input type="text" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
       </ion-item>
     </ion-list>
     <ion-list>
       <ion-item margin-top class="borderLocation" no-padding>
-        Location
-        <ion-icon class="iconAuth" name="ios-locate-outline"></ion-icon>
-        <span float-right class="theamColor" (click)="registerForm(register)" >Sign-Up
-          <ion-icon class="iconAuth theamColor"
-            name="ios-arrow-dropright-circle-outline"></ion-icon>
+        <span (click)=" getLocation()">
+          Location
+          <ion-icon class="iconAuth" name="ios-locate-outline"></ion-icon>
+        </span>
+        <span float-right class="theamColor" (click)="registerForm(register)">Sign-Up
+          <ion-icon class="iconAuth theamColor" name="ios-arrow-dropright-circle-outline"></ion-icon>
         </span>
       </ion-item>
     </ion-list>

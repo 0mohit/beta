@@ -3,36 +3,36 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 @Injectable()
 export class DbInitProvider {
-  db:SQLiteObject
-  constructor(private sqlite: SQLite) {
-    console.log('Hello DbInitProvider Provider');
-  }
+    db: SQLiteObject
+    constructor(private sqlite: SQLite) {
+        console.log('Hello DbInitProvider Provider');
+    }
 
-  createSqlLiteDB() {
-    return new Promise((resolve, reject) => {
-        let createData: any = {};
-        createData['name'] = 'beta';
-        createData['location'] = 'default';
-        this.sqlite.create(createData)
-            .then((db: SQLiteObject) => {
-                this.db = db;
-                resolve(db);
-            })
-            .catch(e => {
-                console.log(e)
-                reject(e)
-            });
-    });
-}
-openDb() {
-    return new Promise((resolve, reject) => {
-        if (this.db) {
-            resolve(this.db);
-        } else {
-            resolve(this.createSqlLiteDB());
-        }
-    });
-}
+    createSqlLiteDB() {
+        return new Promise((resolve, reject) => {
+            let createData: any = {};
+            createData['name'] = 'beta';
+            createData['location'] = 'default';
+            this.sqlite.create(createData)
+                .then((db: SQLiteObject) => {
+                    this.db = db;
+                    resolve(db);
+                })
+                .catch(e => {
+                    console.log(e)
+                    reject(e)
+                });
+        });
+    }
+    openDb() {
+        return new Promise((resolve, reject) => {
+            if (this.db) {
+                resolve(this.db);
+            } else {
+                resolve(this.createSqlLiteDB());
+            }
+        });
+    }
 
 }
 
