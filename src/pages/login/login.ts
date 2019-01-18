@@ -34,6 +34,7 @@ export class LoginPage {
         });
     }
     signUp() {
+        console.log("*******")
         this.navCtrl.push("RegisterPage");
     }
 
@@ -42,4 +43,29 @@ export class LoginPage {
         console.log(formData)
         this.navCtrl.setRoot('ProfilePage')
     }
+    
+    // this.DataBase.executeSql(`UPDATE ${tableName} SET Password='${pass}' , LastUpdatedDateTime='${this.getCurentTimeDate()}' WHERE EmailAddress = '${email}'`, []).then((res) => {
+    //     resolve(pass);
+    // }).catch(e => {
+    //     reject(e);
+    // });
+
+    // checkWhichTableEmailExits(email) {
+    //     return new Promise((resolve, reject) => {
+    //         this.DataBase.executeSql(`SELECT * FROM Customer_Table WHERE EmailAddress='${email}'`, []).then((res) => {
+    //             if (res.rows.length) {
+    //                 resolve('Customer_Table');
+    //             }
+    //             else {
+    //                 this.DataBase.executeSql(`SELECT * FROM Contact_Table WHERE EmailAddress='${email}'`, []).then((res) => {
+    //                     if (res.rows.length) {
+    //                         resolve('Contact_Table')
+    //                     } else {
+    //                         reject('Wrong email');
+    //                     }
+    //                 })
+    //             }
+    //         })
+    //     })
+    // }
 }

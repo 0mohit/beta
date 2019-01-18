@@ -18,21 +18,40 @@
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="careProviderName" placeholder="Care Provider Name"></ion-input>
       </ion-item>
+      <div padding margin-left class="red" *ngIf="!register.controls.careProviderName.valid && register.controls.careProviderName.dirty">
+        Password is required.
+      </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="physicinName" placeholder="Physicin Name"></ion-input>
       </ion-item>
+      <div padding margin-left class="red" *ngIf="!register.controls.physicinName.valid && register.controls.physicinName.dirty">
+        Password is required.
+      </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="number" formControlName="mobile" placeholder="Mobile"></ion-input>
       </ion-item>
+      <div padding margin-left class="red" *ngIf="!register.controls.mobile.valid && register.controls.mobile.dirty">
+        Password is required.
+      </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="userName" placeholder="User Name"></ion-input>
       </ion-item>
+      <div padding margin-left class="red" *ngIf="!register.controls.userName.valid && register.controls.userName.dirty">
+        Password is required.
+      </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
       </ion-item>
+      <div padding margin-left class="red" *ngIf="!register.controls.password.valid && register.controls.password.dirty">
+        Password is required.
+      </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
       </ion-item>
+      <div *ngIf="register.controls.confirmPassword.errors?.MatchPassword">
+        <div padding margin-left class="red" [hidden]="register.controls.confirmPassword.value==''">
+          Confirm Password does not match with New Password</div>
+      </div>
     </ion-list>
     <ion-list>
       <ion-item margin-top class="borderLocation" no-padding>
