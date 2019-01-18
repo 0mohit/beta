@@ -35,11 +35,19 @@ export class DbInitProvider {
     }
 
     createTables() {
-        this.db.executeSql('Create Table User(UserId Integer AUTOINCREMENT NOT NULL,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20),Password varchar(50), Location varchar(200),PRIMARY KEY(UserId))', []).then((res)=>{
-            console.log("**********",res)
-        }).catch(e => console.log("***err",e));
+        this.db.executeSql('Create Table User(UserId INTEGER PRIMARY KEY AUTOINCREMENT ,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20) UNIQUE,Password varchar(50), Location varchar(200))', []).then((res) => {
+            console.log("**********", res)
+        }).catch(e => console.log("***err", e));
     }
-
+    userRegister(query) {
+        return new Promise((resolve, reject) => {
+            this.db.executeSql(query, []).then((res) => {
+                resolve(res)
+            }).catch((err) => {
+                reject(err);
+            })
+        })
+    }
 }
 
 
