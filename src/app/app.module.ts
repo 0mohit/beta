@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,12 +12,16 @@ import { SQLite } from '@ionic-native/sqlite';
 import { Camera } from '@ionic-native/camera';
 import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
+import { ConfigProvider } from '../providers/config/config';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 @NgModule({
   declarations: [
     MyApp
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -32,7 +37,9 @@ import { Geolocation } from '@ionic-native/geolocation';
     ToastProvider,
     Camera,
     NativeGeocoder,
-    Geolocation
+    Geolocation,
+    ConfigProvider,
+    InAppBrowser
   ]
 })
 export class AppModule { }

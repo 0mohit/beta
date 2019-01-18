@@ -3,8 +3,8 @@
   <ion-navbar color="white">
     <img class="headerImg" src="/assets/imgs/vCareLogo.jpg" alt="">
     <img class="headerImg" padding-right float-right src="/assets/imgs/BetaMedTech_Logo.jpg" alt="">
-    <div class="border-header"></div>
   </ion-navbar>
+  <div class="border-header"></div>
 
 </ion-header>
 
@@ -19,25 +19,31 @@
         <ion-input type="text" formControlName="careProviderName" placeholder="Care Provider Name"></ion-input>
       </ion-item>
       <div padding margin-left class="red" *ngIf="!register.controls.careProviderName.valid && register.controls.careProviderName.dirty">
-        Password is required.
+        Care Provider Name is required.
       </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="physicinName" placeholder="Physicin Name"></ion-input>
       </ion-item>
       <div padding margin-left class="red" *ngIf="!register.controls.physicinName.valid && register.controls.physicinName.dirty">
-        Password is required.
+        Physicin Name is required.
       </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="number" formControlName="mobile" placeholder="Mobile"></ion-input>
       </ion-item>
       <div padding margin-left class="red" *ngIf="!register.controls.mobile.valid && register.controls.mobile.dirty">
-        Password is required.
+        Mobile Number is required.
       </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="userName" placeholder="User Name"></ion-input>
       </ion-item>
       <div padding margin-left class="red" *ngIf="!register.controls.userName.valid && register.controls.userName.dirty">
-        Password is required.
+        User Name is required.
+      </div>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="text" formControlName="deviceId" placeholder="Device Id"></ion-input>
+      </ion-item>
+      <div padding margin-left class="red" *ngIf="!register.controls.deviceId.valid && register.controls.deviceId.dirty">
+        DeviceId is required.
       </div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
@@ -64,7 +70,9 @@
         </span>
       </ion-item>
     </ion-list>
-
+    <div padding margin-left class="red" *ngIf="!register.controls.location.valid && register.controls.location.dirty">
+      Location is required.
+    </div>
     <ion-list>
       <ion-item no-lines no-padding>
         <ion-label>Daenerys Targaryen</ion-label>
@@ -82,12 +90,5 @@
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar color="theam">
-    <p class="text">
-      For help, reach out to ...
-    </p>
-    <div> <span class="underLine">www.betamedtech.com</span>
-      <div float-right class="text">Phone:1234567890</div>
-    </div>
-  </ion-toolbar>
+<footer-bottom></footer-bottom>
 </ion-footer>

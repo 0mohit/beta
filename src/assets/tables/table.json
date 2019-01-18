@@ -1,0 +1,5 @@
+{
+    "querys": [
+        "Create Table User(UserId INTEGER PRIMARY KEY AUTOINCREMENT ,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20)  ,Password varchar(50), Location varchar(200),DeviceId varchar(20) UNIQUE)"
+    ]
+}

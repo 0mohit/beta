@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class DbInitProvider {
     db: SQLiteObject
-    constructor(private sqlite: SQLite) {
+    constructor(private sqlite: SQLite, public http: HttpClient) {
         console.log('Hello DbInitProvider Provider');
     }
 
@@ -35,9 +36,31 @@ export class DbInitProvider {
     }
 
     createTables() {
-        this.db.executeSql('Create Table User(UserId INTEGER PRIMARY KEY AUTOINCREMENT ,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20) UNIQUE,Password varchar(50), Location varchar(200))', []).then((res) => {
-            console.log("**********", res)
-        }).catch(e => console.log("***err", e));
+        // this.db.executeSql('Create Table User(UserId INTEGER PRIMARY KEY AUTOINCREMENT ,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20)  ,Password varchar(50), Location varchar(200),DeviceId varchar(20) UNIQUE)', []).then((res) => {
+        //     console.log("**********", res)
+        // }).catch(e => console.log("***err", e));
+        this.http.get('/assets/tables/table.json').subscribe((res) => {
+            let createTable = (tables, callback) => {
+                if (tables.length) {
+                    let first_data = tables.splice(0, 1)[0];
+                    this.db.executeSql(first_data, []).then((res) => {
+                        console.log("**********", res)
+                        createTable(tables, callback);
+                    }).catch(e => {
+                        createTable(tables, callback);
+                        console.log("***err", e)
+                    });
+                } else {
+                    callback(true)
+                }
+            }
+            createTable(res['querys'], (response) => {
+                // resolve(true);
+                console.log("create query executed")
+            })
+        })
+
+
     }
     userRegister(query) {
         return new Promise((resolve, reject) => {

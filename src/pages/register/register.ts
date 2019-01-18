@@ -36,6 +36,7 @@ export class RegisterPage {
       confirmPassword: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required]),
       userName: new FormControl("", [Validators.required]),
+      deviceId: new FormControl("", [Validators.required]),
       location: new FormControl("", [Validators.required])
     }, PasswordValidation.MatchPassword);
 
@@ -50,9 +51,10 @@ export class RegisterPage {
         .then((result: NativeGeocoderReverseResult[]) => {
           console.log(JSON.stringify(result[0]))
           const location = `${result[0].subAdministrativeArea} ${result[0].subLocality} ${result[0].locality} ${result[0].administrativeArea} ${result[0].countryName} ${result[0].postalCode}`
-          this.register.patchValue({ 'location': location })
+          this.register.patchValue({ 'location': location });
+          this._toast.toast(`Location get successfully `, 3000);
         })
-        .catch((error: any) => console.log(error));
+        .catch((error: any) => this._toast.toast(`Location is required `, 3000));
 
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -70,16 +72,14 @@ export class RegisterPage {
       this.register.get('confirmPassword').markAsDirty();
       this.register.get('userName').markAsDirty();
       this.register.get('location').markAsDirty();
+      this.register.get('deviceId').markAsDirty();
     } else {
-      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}')`
+      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']},'${formData.value['deviceId']}')`
       console.log("query", query)
       this._db.userRegister(query).then((res) => {
-        console.log("***********", res['rows'].length)
         formData.value['UserId'] = res['insertId']
         localStorage.setItem('userData', formData.value)
         this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
-        // insertId
-        // localStorage.setItem('userInfo',res)
       }).catch((err) => {
         if (err.code == 6) {
           this._toast.toast('User Name Already Exist', 3000);
