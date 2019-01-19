@@ -62,7 +62,7 @@ export class DbInitProvider {
 
 
     }
-    userRegister(query) {
+    executeQuery(query) {
         return new Promise((resolve, reject) => {
             this.db.executeSql(query, []).then((res) => {
                 resolve(res)

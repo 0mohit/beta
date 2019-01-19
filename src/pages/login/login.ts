@@ -5,6 +5,8 @@ import {
     Validators,
     FormControl
 } from "@angular/forms";
+import { ToastProvider } from '../../providers/toast/toast';
+import { DbInitProvider } from './../../providers/db-init/db-init';
 
 
 @IonicPage()
@@ -16,7 +18,9 @@ export class LoginPage {
     loginForm: FormGroup;
     constructor(
         public navCtrl: NavController,
-        public navParams: NavParams
+        public navParams: NavParams,
+        private _toast: ToastProvider,
+        public _db: DbInitProvider
     ) {
         this.formInit();
     }
@@ -41,9 +45,30 @@ export class LoginPage {
 
     logInForm(formData) {
         console.log(formData)
-        this.navCtrl.setRoot('ProfilePage')
+        if (!formData.valid) {
+            this.loginForm.get('password').markAsDirty();
+            this.loginForm.get('userName').markAsDirty();
+        } else {
+            let query = `SELECT * FROM User WHERE UserName='${formData.value['userName']}' AND Password='${formData.value['password']}'`
+            console.log("query", query)
+            this._db.executeQuery(query).then((res: any) => {
+                if (res.rows.length) {
+                    localStorage.setItem('userData', res);
+                    // this.navCtrl.setRoot('ProfilePage');
+                    this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
+                } else {
+                    this._toast.toast(`User Not Found`, 3000);
+                }
+            }).catch((err) => {
+                // if (err.code == 6) {
+                //     this._toast.toast('User Name Already Exist', 3000);
+                // }
+                console.log("**********err", err.message)
+            })
+        }
+
     }
-    
+
     // this.DataBase.executeSql(`UPDATE ${tableName} SET Password='${pass}' , LastUpdatedDateTime='${this.getCurentTimeDate()}' WHERE EmailAddress = '${email}'`, []).then((res) => {
     //     resolve(pass);
     // }).catch(e => {

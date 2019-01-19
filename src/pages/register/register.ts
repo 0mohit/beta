@@ -76,7 +76,7 @@ export class RegisterPage {
     } else {
       let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']},'${formData.value['deviceId']}')`
       console.log("query", query)
-      this._db.userRegister(query).then((res) => {
+      this._db.executeQuery(query).then((res) => {
         formData.value['UserId'] = res['insertId']
         localStorage.setItem('userData', formData.value)
         this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
