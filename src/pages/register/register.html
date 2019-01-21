@@ -52,7 +52,7 @@
         Password is required.
       </div>
       <ion-item class="margin-botton-five" no-lines>
-        <ion-input type="text" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
+        <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
       </ion-item>
       <div *ngIf="register.controls.confirmPassword.errors?.MatchPassword">
         <div padding margin-left class="red" [hidden]="register.controls.confirmPassword.value==''">

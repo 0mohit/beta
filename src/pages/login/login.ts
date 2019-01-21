@@ -52,9 +52,10 @@ export class LoginPage {
             let query = `SELECT * FROM User WHERE UserName='${formData.value['userName']}' AND Password='${formData.value['password']}'`
             console.log("query", query)
             this._db.executeQuery(query).then((res: any) => {
+                console.log("login res", res);
                 if (res.rows.length) {
                     localStorage.setItem('userData', res);
-                    // this.navCtrl.setRoot('ProfilePage');
+                    this.navCtrl.setRoot('ProfilePage');
                     this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
                 } else {
                     this._toast.toast(`User Not Found`, 3000);
@@ -63,7 +64,6 @@ export class LoginPage {
                 // if (err.code == 6) {
                 //     this._toast.toast('User Name Already Exist', 3000);
                 // }
-                console.log("**********err", err.message)
             })
         }
 

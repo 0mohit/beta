@@ -74,11 +74,12 @@ export class RegisterPage {
       this.register.get('location').markAsDirty();
       this.register.get('deviceId').markAsDirty();
     } else {
-      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']},'${formData.value['deviceId']}')`
-      console.log("query", query)
+      let date = new Date();
+      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId ,CreatedTime,UpdatedTime) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}')`
       this._db.executeQuery(query).then((res) => {
         formData.value['UserId'] = res['insertId']
-        localStorage.setItem('userData', formData.value)
+        localStorage.setItem('userData', formData.value);
+        this.navCtrl.setRoot("ProfilePage");
         this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
       }).catch((err) => {
         if (err.code == 6) {

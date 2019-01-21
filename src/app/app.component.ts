@@ -11,7 +11,7 @@ import { ToastProvider } from '../providers/toast/toast';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'LoginPage';
+  rootPage: any;
   backPressed: boolean = false;
 
   pages: Array<{ title: string, component: any }>;
@@ -24,6 +24,11 @@ export class MyApp {
     private _toast: ToastProvider,
     public splashScreen: SplashScreen) {
     this.initializeApp();
+    if (localStorage.getItem('userData')) {
+      this.rootPage = 'ProfilePage';
+    } else {
+      this.rootPage = 'LoginPage';
+    }
   }
 
   initializeApp() {

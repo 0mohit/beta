@@ -43,7 +43,8 @@ export class DbInitProvider {
             let createTable = (tables, callback) => {
                 if (tables.length) {
                     let first_data = tables.splice(0, 1)[0];
-                    this.db.executeSql(first_data, []).then((res) => {
+                    console.log("first_data",`${first_data}`)
+                    this.db.executeSql(`${first_data}`, []).then((res) => {
                         console.log("**********", res)
                         createTable(tables, callback);
                     }).catch(e => {
