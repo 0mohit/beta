@@ -11,7 +11,7 @@ import { ToastProvider } from '../providers/toast/toast';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'LoginPage';
+  rootPage: any = 'SummaryReportPage';
   backPressed: boolean = false;
 
   pages: Array<{ title: string, component: any }>;
