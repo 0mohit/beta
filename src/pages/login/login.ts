@@ -61,6 +61,7 @@ export class LoginPage {
                     this._toast.toast(`User Not Found`, 3000);
                 }
             }).catch((err) => {
+                console.log(err)
                 // if (err.code == 6) {
                 //     this._toast.toast('User Name Already Exist', 3000);
                 // }

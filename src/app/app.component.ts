@@ -27,7 +27,7 @@ export class MyApp {
     if (localStorage.getItem('userData')) {
       this.rootPage = 'ProfilePage';
     } else {
-      this.rootPage = 'ProfilePage';
+      this.rootPage = 'LoginPage';
     }
   }
 
@@ -36,15 +36,15 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.checkBackButton();
+      if (this.platform.is('cordova')) {
+        this._dbInit.openDb().then((res) => {
+          console.log("res", res)
+          this._dbInit.createTables();
+        }, (err) => {
+          console.log("err")
+        })
+      }
     });
-    if (this.platform.is('cordova')) {
-      this._dbInit.openDb().then((res) => {
-        console.log("res", res)
-        this._dbInit.createTables();
-      }, (err) => {
-        console.log("err")
-      })
-    }
   }
   logout() {
     localStorage.removeItem('userData');

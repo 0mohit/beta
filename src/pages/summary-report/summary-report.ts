@@ -46,7 +46,7 @@ export class SummaryReportPage {
             data: [35, 30, 25, 20, 15, 10, 5, 0],
             spanGaps: false,
           }, {
-            fill: origin,
+            fill: false,
             lineTension: 0.1,
             // backgroundColor: "rgba(230, 126, 34, 1)",
             borderColor: "rgba(230, 126, 34, 1)",

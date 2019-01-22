@@ -12,6 +12,14 @@ export class DbInitProvider {
     createSqlLiteDB() {
         return new Promise((resolve, reject) => {
             let createData: any = {};
+
+            // if(this.platform.is('ios')){
+            //     dbObj = {name: "appdata.db", iosDatabaseLocation: 'default'};
+        
+            // }else if(this.platform.is('android')){
+            //     dbObj = {name: "appdata.db", location: 'default'};
+            // }
+
             createData['name'] = 'beta';
             createData['location'] = 'default';
             this.sqlite.create(createData)
@@ -39,6 +47,7 @@ export class DbInitProvider {
         // this.db.executeSql('Create Table User(UserId INTEGER PRIMARY KEY AUTOINCREMENT ,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20)  ,Password varchar(50), Location varchar(200),DeviceId varchar(20) UNIQUE)', []).then((res) => {
         //     console.log("**********", res)
         // }).catch(e => console.log("***err", e));
+        console.log("db*****",this.db)
         this.http.get('/assets/tables/table.json').subscribe((res) => {
             let createTable = (tables, callback) => {
                 if (tables.length) {
