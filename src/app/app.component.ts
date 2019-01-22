@@ -27,7 +27,7 @@ export class MyApp {
     if (localStorage.getItem('userData')) {
       this.rootPage = 'ProfilePage';
     } else {
-      this.rootPage = 'LoginPage';
+      this.rootPage = 'ProfilePage';
     }
   }
 
@@ -46,7 +46,10 @@ export class MyApp {
       })
     }
   }
-
+  logout() {
+    localStorage.removeItem('userData');
+    this.nav.setRoot('LoginPage');
+  }
   checkBackButton() {
     this.platform.registerBackButtonAction(() => {
       let nav = this.app.getActiveNavs()[0];

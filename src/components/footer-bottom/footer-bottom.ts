@@ -9,6 +9,6 @@ export class FooterBottomComponent {
   constructor(private iab: InAppBrowser) {
   }
   openUrl() {
-    this.iab.create('www.betamedtech.com', '_blank', 'hardwareback=yes ,location=yes');
+    this.iab.create('https://www.betamedtech.com', '_blank', 'hardwareback=yes ,location=yes');
   }
 }
