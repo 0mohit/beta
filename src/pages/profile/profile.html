@@ -11,58 +11,127 @@
 
 </ion-header>
 
-
-
 <ion-content>
-  <ion-item no-lines class="marginTop margin-botton-five">
-    <div>
-      <span>Name : Tom Lee</span>
-      <span float-right>Gender : Male </span>
-    </div>
-    <div class="clear">
-      <span>Age : 73</span>
-      <span float-right>Weight : 61</span>
-    </div>
-    <div class="clear">
-      Location : *****************
-    </div>
-  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-8 class="font1">
+        Name : Tom Lee
+      </ion-col>
+      <ion-col col-4 class="font1" >
+        Gender : Male
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8 class="font1">
+        Age : 73
+      </ion-col>
+      <ion-col col-4 class="font1">
+        Weight : 61
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="font1">
+        Location :
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
   <ion-list-header class="theamColor" no-margin> Sensoor Readings </ion-list-header>
   <div class="border-header"></div>
-  <ion-item no-lines class="marginTop margin-botton-five">
-    <div>
-      <span>Temperature : <input type="text"></span>
-      <span float-right>Moisture : <input type="text"></span>
-    </div>
-    <div class="clear">
-      <span>Moisture : <input type="text"></span>
-      <span float-right>
-        <button ion-button>Default</button>
-      </span>
-    </div>
-  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-row>
+          <ion-col class="font1-2" col-8>
+            Temperature :
+          </ion-col>
+          <ion-col col-3>
+            <input type="text">
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6>
+        <ion-row>
+          <ion-col class="font1-2" col-8>
+            Moisture :
+          </ion-col>
+          <ion-col col-3>
+            <input type="text">
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-row>
+          <ion-col class="font1-2" col-8>
+            Pressure :
+          </ion-col>
+          <ion-col col-3>
+            <input type="text">
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-6 style="text-align:right;">
+        <button class="btn" ion-button>Get Readings</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-list-header class="theamColor" no-margin> Skin condition </ion-list-header>
   <div class="border-header"></div>
-  <ion-item no-lines class="marginTop margin-botton-five">
-    <div>
-      <span (click)="mediaActionSheet()">Take Photo ****</span>
-      <span float-right>View Photo</span>
-    </div>
-    <div class="clear"></div>
-    <ion-grid>
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-8 class="font1" (click)="mediaActionSheet()">
+        Take Photo :
+        <ion-icon name="camera"></ion-icon>
+      </ion-col>
+      <ion-col col-4 class="font1" >
+        View Photo :
+        <ion-icon name="eye"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-row>
+          <ion-col padding-top class="font1" col-4>
+            Skin condition
+          </ion-col>
+          <ion-col col-8>
+            <ion-item no-lines class="backgroung-skyBlue">
+              <ion-range no-padding [(ngModel)]="brightness">
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div margin>
+    <button color="secondary" ion-button block>Evaluate Pressure Ulcer</button>
+  </div>
+  <div style="margin:5px; border: 2px solid #49c2f3;">
+    <ion-grid style="background:#cde8f3 !important;">
       <ion-row>
-        <ion-col col-3>
-          Skin condition
+        <ion-col col-5>
+          Pressure Ulcer in (Hrs)
         </ion-col>
-        <ion-col col-9>
-          <ion-item class="backgroung-skyBlue">
-            <ion-range no-padding [(ngModel)]="brightness">
-            </ion-range>
-          </ion-item>
+        <ion-col col-7>
+          <ion-badge color="danger">12</ion-badge>
+          <ion-badge color="danger">24</ion-badge>
+          <ion-badge color="danger">36</ion-badge>
+          <ion-badge color="danger">48</ion-badge>
+          <ion-badge color="danger">72</ion-badge>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-item>
+  </div>
 </ion-content>
 <ion-footer>
   <ion-toolbar color="theam">

@@ -10,6 +10,7 @@ import { ActionSheetController } from 'ionic-angular';
 })
 export class ProfilePage {
   image: string;
+  location = localStorage.getItem('userData');
   constructor(public navParams: NavParams,
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController

@@ -69,7 +69,7 @@ export class RegisterPage {
       this.register.get('password').markAsDirty();
       this.register.get('careProviderName').markAsDirty();
       this.register.get('physicinName').markAsDirty();
-      this.register.get('confirmPassword').markAsDirty();
+      this.register.get('confirmPassword').markAsTouched();
       this.register.get('userName').markAsDirty();
       this.register.get('location').markAsDirty();
       this.register.get('deviceId').markAsDirty();

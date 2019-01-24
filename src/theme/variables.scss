@@ -76,7 +76,7 @@ $colors: (
 }
 
 .text{
-  font-size: 17px;
+  font-size: 1em;
   font-weight: bold;
 }
 
@@ -122,11 +122,11 @@ $colors: (
   color: gray;
 }
 .theamColor {
-  color: #4457e5!important;
+  color: #49c2f3!important;
 }
 .underLine {
   text-decoration: underline;
-  font-size: 17px;
+  font-size: 1em;
   color: #0015b5;
 }
 .clear{
@@ -137,5 +137,10 @@ $colors: (
   margin-top :2px;
 }
 .red{
-  color:red;
+  color: #c52525;
+  background: pink;
+  border: 1px solid #e86262;
+  border-radius: 10px;
+  width: 94%;
+  margin: 10px;
 }

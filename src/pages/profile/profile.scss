@@ -3,7 +3,36 @@ input{
     max-width: 50px;
     text-align: center;
     border-radius: 10px;
-    max-height: 20px;
-    border-color: #848484;
+    height: 1.8em;
+    border-color: #505969;
+    color: #545454;
+}
+.btn{
+    border-radius: 5px;
+    height: 1.8em;
+    font-size: 1.6rem;
+    color: #fff;
+    background-color: #505969;
+}
+.font1-2{
+    font-size: 1.2em;
+}
+.font1{
+    font-size: 1.1em;
+}
+.label{
+    margin-bottom: 0px !important;
+}
+.grid{
+    background-color: #49c2f3 !important;
+
+}
+.button{
+    text-transform: capitalize;
+}
+
+.badge {
+    border: 2px solid white;
+    border-radius: 110px;
 }
 }
