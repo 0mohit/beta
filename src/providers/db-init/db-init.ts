@@ -15,7 +15,7 @@ export class DbInitProvider {
 
             // if(this.platform.is('ios')){
             //     dbObj = {name: "appdata.db", iosDatabaseLocation: 'default'};
-        
+
             // }else if(this.platform.is('android')){
             //     dbObj = {name: "appdata.db", location: 'default'};
             // }
@@ -44,15 +44,11 @@ export class DbInitProvider {
     }
 
     createTables() {
-        // this.db.executeSql('Create Table User(UserId INTEGER PRIMARY KEY AUTOINCREMENT ,CareProviderName varchar(50),PhysicianName varchar(50),Mobile varchar(50),UserName varchar(20)  ,Password varchar(50), Location varchar(200),DeviceId varchar(20) UNIQUE)', []).then((res) => {
-        //     console.log("**********", res)
-        // }).catch(e => console.log("***err", e));
-        console.log("db*****",this.db)
         this.http.get('/assets/tables/table.json').subscribe((res) => {
             let createTable = (tables, callback) => {
                 if (tables.length) {
                     let first_data = tables.splice(0, 1)[0];
-                    console.log("first_data",`${first_data}`)
+                    console.log("first_data", `${first_data}`)
                     this.db.executeSql(`${first_data}`, []).then((res) => {
                         console.log("**********", res)
                         createTable(tables, callback);
@@ -65,7 +61,6 @@ export class DbInitProvider {
                 }
             }
             createTable(res['querys'], (response) => {
-                // resolve(true);
                 console.log("create query executed")
             })
         })
@@ -88,15 +83,6 @@ export class DbInitProvider {
 
 /*
 
-Create Table User
-(UserId Integer NOT NULL
-CareProviderName varchar(50),
-PhysicianName varchar(50),
-Mobile varchar(50),
-UserName varchar(20),
-Password varchar(50),
-Location varchar(200),
-PRIMARY KEY(UserId));
 
 Create Table UserDetail
 (UserDetailId Integer NOT NULL
@@ -108,14 +94,6 @@ Gender Char,
 Weight varchar(50),
 PRIMARY KEY(UserDetailId)
 Foreign Key(UserId) references User(UserId));
-
-Create Table SensorReadings (
-    ReadingId Integer NOT NULL,
-    UserId Integer,
-    Temperature DECIMAL(10,2),
-    Moisture DECIMAL(10,2)
-    Pressure DECIMAL(10,2)
-)
 
 
 SELECT * FROM USERDETAIL UD InnerJoin
