@@ -22,14 +22,19 @@ export class SummaryReportPage {
 
       type: 'line',
       data: {
-        
-        labels: [1,2,3,4,5,6,7,8,9],
+
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         datasets: [
           {
+            label: 'sahb',
+
             fill: false,
+            usePointStyle: true,
             lineTension: 0.1,
             backgroundColor: "rgba(75,192,192,0.4)",
             borderColor: "rgba(75,192,192,1)",
+            borderWidth: 0,
+            borderHeight: 2,
             borderCapStyle: 'square',
             borderDash: [],
             borderDashOffset: 0.0,
@@ -48,22 +53,45 @@ export class SummaryReportPage {
           }, {
             fill: false,
             lineTension: 0.1,
-            // backgroundColor: "rgba(230, 126, 34, 1)",
+            borderWidth: 0,
+            backgroundColor: "rgba(230, 126, 34, 1)",
             borderColor: "rgba(230, 126, 34, 1)",
-            // borderCapStyle: 'square',
+            borderCapStyle: 'square',
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'butt',
-            // pointBorderColor: "rgba(230, 126, 34, 1)",
+            pointBorderColor: "rgba(230, 126, 34, 1)",
             pointBackgroundColor: "#fff",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            // pointHoverBackgroundColor: "rgba(230, 126, 34, 1)",
-            // pointHoverBorderColor: "rgba(230, 126, 34, 1)",
+            pointHoverBackgroundColor: "rgba(230, 126, 34, 1)",
+            pointHoverBorderColor: "rgba(230, 126, 34, 1)",
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
             data: [20.5, 21, 21.5, 22, 22.5, 23],
+            spanGaps: false,
+          }, {
+            fill: false,
+            lineTension: 0.1,
+            borderWidth: 0,
+            backgroundColor: "rgba(230, 126, 34, 1)",
+            borderColor: "rgba(230, 126, 34, 1)",
+            borderCapStyle: 'square',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'butt',
+            pointBorderColor: "rgba(230, 126, 34, 1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(230, 126, 34, 1)",
+            pointHoverBorderColor: "rgba(230, 126, 34, 1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+
             spanGaps: false,
           }
         ]
@@ -71,14 +99,31 @@ export class SummaryReportPage {
         responsive: true,
         title: {
           display: true,
-          text: 'Chart.js Line Chart'
+          text: 'Parient Reading Trends',
+          fontColor: 'white'
         },
         tooltips: {
           mode: 'label',
         },
         hover: {
           mode: 'nearest',
-          intersect: true
+          intersect: false
+        },
+        layout: {
+          padding: {
+            left: -20,
+            right: 10,
+            top: 0,
+            bottom: 0
+          }
+        },
+        legend: {
+          display: true,
+          position: 'bottom',
+          labels: {
+            fontColor: 'white'
+          },
+
         },
         scales: {
           xAxes: [{
@@ -87,8 +132,8 @@ export class SummaryReportPage {
               display: false
             },
             scaleLabel: {
-              display: true,
-            },ticks: {
+              display: false,
+            }, ticks: {
               fontColor: "#CCC", // this here
             },
           }],
@@ -96,12 +141,13 @@ export class SummaryReportPage {
             display: true,
             gridLines: {
               display: true,
-              color: "#CCC"
+              color: "#FFF"
             },
             scaleLabel: {
               display: true,
               fontSize: 15
-            },ticks: {
+            }, ticks: {
+              beginAtZero: true,
               fontColor: "#CCC", // this here
             },
           }]
