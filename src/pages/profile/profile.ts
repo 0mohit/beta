@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
+import { ToastProvider } from '../../providers/toast/toast';
 
 @IonicPage()
 @Component({
@@ -10,16 +11,42 @@ import { ActionSheetController } from 'ionic-angular';
 })
 export class ProfilePage {
   image: string;
+  sensoor = {
+    temperature: 0,
+    moisture: 0,
+    pressure: 0
+  }
   location = localStorage.getItem('userData');
   constructor(public navParams: NavParams,
     private camera: Camera,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    private _toast: ToastProvider,
   ) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SummaryReportPage');
   }
+
+  getReading() {
+    if (this.validateSensoorList()) {
+
+    } else {
+      this._toast.toast(`All Sensoor Fileds are required`, 3000);
+    }
+
+  }
+
+  validateSensoorList() {
+    let isValid = true;
+    Object.keys(this.sensoor).forEach((value) => {
+      if (this.sensoor[value]) {
+        isValid = false;
+      }
+    })
+    return !isValid;
+  }
+
   takePicture() {
     this.camera.getPicture({
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -28,7 +55,7 @@ export class ProfilePage {
       quality: 50,
       correctOrientation: true
     }).then((imageData) => {
-      console.log("image",imageData)
+      console.log("image", imageData)
     }, (err) => {
       console.log(err);
     });
@@ -47,12 +74,13 @@ export class ProfilePage {
     this.camera.getPicture(cameraOptions)
       .then(filePath => {
         console.log('filePath', filePath)
+        let updatedUrl;
         if (filePath.indexOf('.jpg') !== -1) {
-          var updatedUrl = filePath.slice(0, filePath.lastIndexOf('.jpg') + 4);
+          updatedUrl = filePath.slice(0, filePath.lastIndexOf('.jpg') + 4);
         } else if (filePath.indexOf('.png') !== -1) {
-          var updatedUrl = filePath.slice(0, filePath.lastIndexOf('.png') + 4);
+          updatedUrl = filePath.slice(0, filePath.lastIndexOf('.png') + 4);
         } else {
-          var updatedUrl = filePath.slice(0, filePath.lastIndexOf('.jpeg') + 4);
+          updatedUrl = filePath.slice(0, filePath.lastIndexOf('.jpeg') + 4);
         }
         var fileName = updatedUrl.substr(updatedUrl.lastIndexOf('/') + 1);
 

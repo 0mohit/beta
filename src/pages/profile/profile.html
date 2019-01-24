@@ -49,7 +49,7 @@
             Temperature :
           </ion-col>
           <ion-col col-3>
-            <input type="text">
+            <input [(ngModel)]="sensoor.temperature" type="number">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -59,7 +59,7 @@
             Moisture :
           </ion-col>
           <ion-col col-3>
-            <input type="text">
+            <input [(ngModel)]="sensoor.moisture" type="number">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -71,12 +71,12 @@
             Pressure :
           </ion-col>
           <ion-col col-3>
-            <input type="text">
+            <input type="number" [(ngModel)]="sensoor.pressure">
           </ion-col>
         </ion-row>
       </ion-col>
       <ion-col col-6 style="text-align:right;">
-        <button class="btn" ion-button>Get Readings</button>
+        <button class="btn" (click)="getReading()" ion-button>Get Readings</button>
       </ion-col>
     </ion-row>
   </ion-grid>
