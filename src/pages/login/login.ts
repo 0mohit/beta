@@ -38,7 +38,6 @@ export class LoginPage {
         });
     }
     signUp() {
-        console.log("*******")
         this.navCtrl.push("RegisterPage");
     }
 
@@ -52,9 +51,8 @@ export class LoginPage {
             let query = `SELECT * FROM User WHERE UserName='${formData.value['userName']}' AND Password='${formData.value['password']}'`
             console.log("query", query)
             this._db.executeQuery(query).then((res: any) => {
-                console.log("login res", res);
                 if (res.rows.length) {
-                    localStorage.setItem('userData', res);
+                    localStorage.setItem('userData', JSON.stringify(res.rows.item(0)));
                     this.navCtrl.setRoot('ProfilePage');
                     this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
                 } else {

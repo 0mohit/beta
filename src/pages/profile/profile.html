@@ -18,7 +18,7 @@
       <ion-col col-8 class="font1">
         Name : Tom Lee
       </ion-col>
-      <ion-col col-4 class="font1" >
+      <ion-col col-4 class="font1">
         Gender : Male
       </ion-col>
     </ion-row>
@@ -32,7 +32,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="font1">
-        Location :
+        Location : {{location['Location']}}
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -49,7 +49,7 @@
             Temperature :
           </ion-col>
           <ion-col col-3>
-            <input [(ngModel)]="sensoor.temperature" type="number">
+            <input placeholder="0" [(ngModel)]="sensoor.temperature" type="number">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -59,7 +59,7 @@
             Moisture :
           </ion-col>
           <ion-col col-3>
-            <input [(ngModel)]="sensoor.moisture" type="number">
+            <input placeholder="0" [(ngModel)]="sensoor.moisture" type="number">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -71,7 +71,7 @@
             Pressure :
           </ion-col>
           <ion-col col-3>
-            <input type="number" [(ngModel)]="sensoor.pressure">
+            <input type="number" placeholder="0" [(ngModel)]="sensoor.pressure">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -92,7 +92,7 @@
         Take Photo :
         <ion-icon name="camera"></ion-icon>
       </ion-col>
-      <ion-col col-4 class="font1" >
+      <ion-col col-4 class="font1">
         View Photo :
         <ion-icon name="eye"></ion-icon>
       </ion-col>
