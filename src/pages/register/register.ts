@@ -38,7 +38,8 @@ export class RegisterPage {
       password: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       userName: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       deviceId: new FormControl("", [Validators.required, Validators.maxLength(20)]),
-      location: new FormControl("", [Validators.required, Validators.maxLength(200)])
+      location: new FormControl("", [Validators.required, Validators.maxLength(200)]),
+      Daenerys: new FormControl("")
     }, PasswordValidation.MatchPassword);
 
   }
@@ -78,7 +79,13 @@ export class RegisterPage {
       this.register.get('deviceId').markAsDirty();
     } else {
       let date = new Date();
-      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId ,CreatedTime,UpdatedTime) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}')`
+      let daenerys
+      if (formData.value['Daenerys']) {
+        daenerys = 1;
+      } else {
+        daenerys = 0;
+      }
+      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId ,CreatedTime,UpdatedTime ,Daenerys) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}','${daenerys}')`
       this._db.executeQuery(query).then((res) => {
         formData.value['UserId'] = res['insertId']
         localStorage.setItem('userData', JSON.stringify(formData.value));
