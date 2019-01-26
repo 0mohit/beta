@@ -39,7 +39,7 @@ export class RegisterPage {
       userName: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       deviceId: new FormControl("", [Validators.required, Validators.maxLength(20)]),
       location: new FormControl("", [Validators.required, Validators.maxLength(200)]),
-      Daenerys: new FormControl("")
+      Daenerys: new FormControl(true)
     }, PasswordValidation.MatchPassword);
 
   }
