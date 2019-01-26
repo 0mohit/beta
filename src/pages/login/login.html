@@ -18,15 +18,20 @@
       <ion-item class="margin-botton-five" no-lines>
         <ion-input formControlName="userName" type="text" (keyup)="removeSpace('userName')" placeholder="User Name"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!loginForm.controls.userName.valid && loginForm.controls.userName.dirty">
+      <div padding margin-left class="red" *ngIf="loginForm.controls.userName.value=='' && !loginForm.controls.userName.valid && loginForm.controls.userName.dirty">
         User Name is required.
       </div>
+      <div padding margin-left class="red" *ngIf="loginForm.controls['userName'].hasError('maxlength')">User Name can
+        not exceed more then 20 characters</div>
       <ion-item class="margin-botton-five" no-lines>
         <ion-input formControlName="password" type="password" (keyup)="removeSpace('password')" placeholder="Password"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
+      <div padding margin-left class="red" *ngIf="loginForm.controls.password.value=='' &&  !loginForm.controls.password.valid && loginForm.controls.password.dirty">
         Password is required.
       </div>
+      <div padding margin-left class="red" *ngIf="loginForm.controls['password'].hasError('maxlength')">Password can
+        not
+        exceed more then 20 characters</div>
       <ion-item no-lines class="borderLocation margin-botton-five" (click)="logInForm(loginForm)" no-padding>
         <span float-right class="theamColor">Sign-In
           <ion-icon class="iconAuth theamColor" name="ios-arrow-dropright-circle-outline"></ion-icon>

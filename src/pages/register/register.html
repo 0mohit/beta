@@ -18,46 +18,81 @@
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="careProviderName" placeholder="Care Provider Name"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!register.controls.careProviderName.valid && register.controls.careProviderName.dirty">
+      <div padding margin-left class="red" *ngIf="register.controls.careProviderName.value=='' && !register.controls.careProviderName.valid && register.controls.careProviderName.dirty">
         Care Provider Name is required.
       </div>
+      <div padding margin-left class="red" *ngIf="register.controls['careProviderName'].hasError('maxlength')">
+        CareProviderName can not exceed more then 30 characters</div>
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="physicinName" placeholder="Physicin Name"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!register.controls.physicinName.valid && register.controls.physicinName.dirty">
+      <div padding margin-left class="red" *ngIf="register.controls.physicinName.value=='' &&  !register.controls.physicinName.valid && register.controls.physicinName.dirty">
         Physicin Name is required.
       </div>
+
+      <div padding margin-left class="red" *ngIf="register.controls['physicinName'].hasError('maxlength')">Physicin
+        Name can not exceed more then 30 characters</div>
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="number" formControlName="mobile" placeholder="Mobile"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!register.controls.mobile.valid && register.controls.mobile.dirty">
+      <div padding margin-left class="red" *ngIf="register.controls.mobile.value=='' && !register.controls.mobile.valid && register.controls.mobile.dirty">
         Mobile Number is required.
       </div>
+      <div padding margin-left class="red" *ngIf="register.controls['mobile'].hasError('minlength')">Use 10 or more
+        characters with a mix of letters</div>
+      <div padding margin-left class="red" *ngIf="register.controls['mobile'].hasError('maxlength')">Use 12 or less
+        characters with a max of letters</div>
+
+
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="userName" placeholder="User Name"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!register.controls.userName.valid && register.controls.userName.dirty">
+      <div padding margin-left class="red" *ngIf="register.controls.userName.value=='' &&  !register.controls.userName.valid && register.controls.userName.dirty">
         User Name is required.
       </div>
+      <div padding margin-left class="red" *ngIf="register.controls['userName'].hasError('maxlength')">User Name can
+        not exceed more then 20 characters</div>
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="deviceId" placeholder="Device Id"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!register.controls.deviceId.valid && register.controls.deviceId.dirty">
+      <div padding margin-left class="red" *ngIf="register.controls.deviceId.value=='' &&  !register.controls.deviceId.valid && register.controls.deviceId.dirty">
         DeviceId is required.
       </div>
+      <div padding margin-left class="red" *ngIf="register.controls['deviceId'].hasError('maxlength')">DeviceId can not
+        exceed more then 20 charecters</div>
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
       </ion-item>
-      <div padding margin-left class="red" *ngIf="!register.controls.password.valid && register.controls.password.dirty">
+      <div padding margin-left class="red" *ngIf="register.controls.password.value=='' &&  !register.controls.password.valid && register.controls.password.dirty">
         Password is required.
       </div>
+      <div padding margin-left class="red" *ngIf="register.controls['password'].hasError('maxlength')">Password can not
+        exceed more then 20 characters</div>
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="password" formControlName="confirmPassword" placeholder="Confirm Password"></ion-input>
       </ion-item>
+      <div padding margin-left class="red" *ngIf="register.controls.confirmPassword.value=='' && register.controls.confirmPassword.dirty">
+        Confirm Password is required.
+      </div>
       <div *ngIf="register.controls.confirmPassword.errors?.MatchPassword">
         <div padding margin-left class="red" [hidden]="register.controls.confirmPassword.value==''">
           Confirm Password does not match with New Password</div>
       </div>
+      <ion-item class="margin-botton-five" no-lines>
+        <ion-input type="text" formControlName="location" placeholder="Location"></ion-input>
+      </ion-item>
+      <div padding margin-left class="red" *ngIf="register.controls.location.value=='' && !register.controls.location.valid && register.controls.location.dirty">
+        Location is required.
+      </div>
+      <div padding margin-left class="red" *ngIf="register.controls['location'].hasError('maxlength')">Location can not
+        exceed more then 200 characters </div>
+
     </ion-list>
     <ion-list>
       <ion-item margin-top class="borderLocation" no-padding>
@@ -70,9 +105,7 @@
         </span>
       </ion-item>
     </ion-list>
-    <div padding margin-left class="red" *ngIf="!register.controls.location.valid && register.controls.location.dirty">
-      Location is required.
-    </div>
+
     <ion-list>
       <ion-item no-lines no-padding>
         <ion-label>Daenerys Targaryen</ion-label>
