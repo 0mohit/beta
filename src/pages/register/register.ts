@@ -10,6 +10,7 @@ import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } fr
 import { Geolocation } from '@ionic-native/geolocation';
 import { DbInitProvider } from './../../providers/db-init/db-init';
 import { ToastProvider } from '../../providers/toast/toast';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @IonicPage()
 @Component({
@@ -25,9 +26,24 @@ export class RegisterPage {
     private nativeGeocoder: NativeGeocoder,
     private geolocation: Geolocation,
     private _toast: ToastProvider,
-    public _db: DbInitProvider) {
+    public _db: DbInitProvider,
+    public androidPermissions: AndroidPermissions) {
     this.formInit();
+  }
+
+
+  ionViewDidLoad() {
+
+    this.androidPermissions.requestPermissions(
+      [
+        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION, 
+        this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION
+      ]
+    );
+
     this.getLocation();
+
+
   }
   formInit() {
     this.register = new FormGroup({
@@ -67,7 +83,7 @@ export class RegisterPage {
 
   }
   registerForm(formData) {
-    console.log(formData.value)
+    console.log(formData.value, formData.valid)
     if (!formData.valid) {
       this.register.get('mobile').markAsDirty();
       this.register.get('password').markAsDirty();
@@ -79,13 +95,14 @@ export class RegisterPage {
       this.register.get('deviceId').markAsDirty();
     } else {
       let date = new Date();
-      let daenerys
+      let daenerys;
       if (formData.value['Daenerys']) {
         daenerys = 1;
       } else {
         daenerys = 0;
       }
-      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId ,CreatedTime,UpdatedTime ,Daenerys) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}','${daenerys}')`
+      let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId,CreatedTime,UpdatedTime,Daenerys) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}',${daenerys})`
+      console.log("***********", query)
       this._db.executeQuery(query).then((res) => {
         formData.value['UserId'] = res['insertId']
         localStorage.setItem('userData', JSON.stringify(formData.value));

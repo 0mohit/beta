@@ -44,7 +44,7 @@ export class DbInitProvider {
     }
 
     createTables() {
-        this.http.get('/assets/tables/table.json').subscribe((res) => {
+        this.http.get('assets/tables/table.json').subscribe((res) => {
             let createTable = (tables, callback) => {
                 if (tables.length) {
                     let first_data = tables.splice(0, 1)[0];

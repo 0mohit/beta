@@ -14,6 +14,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ConfigProvider } from '../providers/config/config';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     SQLite,
     ToastProvider,
     Camera,
+    AndroidPermissions,
     NativeGeocoder,
     Geolocation,
     ConfigProvider,
