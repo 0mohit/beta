@@ -32,7 +32,7 @@
     </ion-row>
     <ion-row>
       <ion-col class="font1">
-        Location : <span *ngIf="location">{{location['Location']}}</span> 
+        Location : <span *ngIf="location">{{location['Location']}}</span>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -92,26 +92,30 @@
         Take Photo :
         <ion-icon name="camera"></ion-icon>
       </ion-col>
-      <ion-col col-4 class="font1">
+      <ion-col col-4 class="font1" (click)=" viewPhoto()">
         View Photo :
         <ion-icon name="eye"></ion-icon>
       </ion-col>
     </ion-row>
+    <!-- <ion-row>
+      <ion-col> -->
     <ion-row>
-      <ion-col>
-        <ion-row>
-          <ion-col padding-top class="font1" col-4>
-            Skin condition
-          </ion-col>
-          <ion-col col-8>
-            <ion-item no-lines class="backgroung-skyBlue">
-              <ion-range no-padding [(ngModel)]="brightness">
-              </ion-range>
-            </ion-item>
-          </ion-col>
-        </ion-row>
+      <ion-col style="padding-right:0px;" padding-top class="font1" col-5>
+        Skin condition <ion-badge style="border: 0px solid white;
+            border-radius: 10px;" item-end>{{brightness}}</ion-badge>
       </ion-col>
+      <ion-col col-7>
+        <ion-item style="padding-left:5px;" no-lines class="backgroung-skyBlue">
+          <ion-range no-padding min="0" max="100" [(ngModel)]="brightness">
+          </ion-range>
+        </ion-item>
+      </ion-col>
+      <div style="text-align:right;width:99%;">
+        <button class="btn" (click)="getReading()" ion-button>Store Image</button>
+      </div>
     </ion-row>
+    <!-- </ion-col>
+    </ion-row> -->
   </ion-grid>
   <div margin>
     <button color="secondary" ion-button block>Evaluate Pressure Ulcer</button>

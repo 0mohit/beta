@@ -27,7 +27,8 @@ export class RegisterPage {
     private geolocation: Geolocation,
     private _toast: ToastProvider,
     public _db: DbInitProvider,
-    public androidPermissions: AndroidPermissions) {
+    public androidPermissions: AndroidPermissions
+    ) {
     this.formInit();
   }
 

@@ -27,7 +27,7 @@ export class MyApp {
     if (localStorage.getItem('userData')) {
       this.rootPage = 'ProfilePage';
     } else {
-      this.rootPage = 'ProfilePage';
+      this.rootPage = 'LoginPage';
     }
   }
 

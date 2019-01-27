@@ -74,7 +74,9 @@ $colors: (
 .footer .toolbar{
   padding: 0px 10px 5px;
 }
-
+.no-padding{
+  padding: 0px !important;
+}
 .text{
   font-size: 1em;
   font-weight: bold;

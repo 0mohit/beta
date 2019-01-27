@@ -4,7 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
 import { ToastProvider } from '../../providers/toast/toast';
 import { DbInitProvider } from './../../providers/db-init/db-init';
-
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -17,8 +17,11 @@ export class ProfilePage implements OnInit {
     moisture: null,
     pressure: null
   }
+  brightness = 0;
   location;
+  imageToBeUpload='';
   constructor(public navParams: NavParams,
+    private photoViewer: PhotoViewer,
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
     private _toast: ToastProvider,
@@ -33,6 +36,9 @@ export class ProfilePage implements OnInit {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad SummaryReportPage');
+  }
+  viewPhoto() {
+    this.photoViewer.show(this.imageToBeUpload);
   }
 
   getReading() {
@@ -87,6 +93,7 @@ export class ProfilePage implements OnInit {
       correctOrientation: true
     }).then((imageData) => {
       console.log("image", imageData)
+      this.imageToBeUpload = imageData;
     }, (err) => {
       console.log(err);
     });
@@ -116,7 +123,7 @@ export class ProfilePage implements OnInit {
         var fileName = updatedUrl.substr(updatedUrl.lastIndexOf('/') + 1);
 
         console.log("fileName", updatedUrl)
-
+        this.imageToBeUpload = updatedUrl;
       },
         err => console.log(err));
   }

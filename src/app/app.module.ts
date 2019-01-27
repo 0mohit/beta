@@ -15,6 +15,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { ConfigProvider } from '../providers/config/config';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
   declarations: [
@@ -31,17 +32,18 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
   ],
   providers: [
     StatusBar,
+    AndroidPermissions,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DbInitProvider,
     SQLite,
     ToastProvider,
     Camera,
-    AndroidPermissions,
     NativeGeocoder,
     Geolocation,
     ConfigProvider,
-    InAppBrowser
+    InAppBrowser,
+    PhotoViewer
   ]
 })
 export class AppModule { }
