@@ -45,17 +45,16 @@ export class ProfilePage implements OnInit {
     if (this.validateSensoorList()) {
       // AND CreatedTime > DATE_SUB(curdate(), INTERVAL 1 DAY)
       let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 1 DAY)'`
-      console.log("query", query)
       this._db.executeQuery(query).then((res: any) => {
-        console.log('res', res)
         if (res.rows.length == 0) {
           let date = new Date();
           let query = `INSERT INTO SensorReadings(UserId ,DeviceId,Temperature, Moisture ,Pressure ,CreatedTime,UpdatedTime) VALUES  (${this.location['UserId']},'${this.location['DeviceId']}','${this.sensoor['temperature']}','${this.sensoor['moisture']}','${this.sensoor['pressure']}','${date}','${date}')`
           console.log("query", query)
           this._db.executeQuery(query).then((res: any) => {
-            if (res.rows.length) {
+            console.log("***",res)
+            // if (res.rows.length) {
               this._toast.toast(`SensorReadings insert successfully `, 3000);
-            }
+            // }
           }).catch(e => {
             console.log("err***************", e)
           })

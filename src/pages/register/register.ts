@@ -28,7 +28,7 @@ export class RegisterPage {
     private _toast: ToastProvider,
     public _db: DbInitProvider,
     public androidPermissions: AndroidPermissions
-    ) {
+  ) {
     this.formInit();
   }
 
@@ -37,7 +37,7 @@ export class RegisterPage {
 
     this.androidPermissions.requestPermissions(
       [
-        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION, 
+        this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION,
         this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION
       ]
     );
@@ -103,15 +103,31 @@ export class RegisterPage {
         daenerys = 0;
       }
       let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId,CreatedTime,UpdatedTime,Daenerys) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}',${daenerys})`
-      console.log("***********", query)
       this._db.executeQuery(query).then((res) => {
-        formData.value['UserId'] = res['insertId']
-        localStorage.setItem('userData', JSON.stringify(formData.value));
+        formData.value['UserId'] = res['insertId'];
+        const userData = {
+          CareProviderName: formData.value.careProviderName,
+          CreatedTime: date,
+          Daenerys: formData.value.Daenerys,
+          DeviceId: formData.value.deviceId,
+          Location: formData.value.location,
+          Mobile: formData.value.mobile,
+          Password: formData.value.password,
+          PhysicianName: formData.value.physicinName,
+          UpdatedTime: date,
+          UserId: formData.value.UserId,
+          UserName: formData.value.userName
+        }
+        localStorage.setItem('userData', JSON.stringify(userData));
         this.navCtrl.setRoot("ProfilePage");
         this._toast.toast(`Wellcome ${formData.value['userName']}`, 3000);
       }).catch((err) => {
         if (err.code == 6) {
-          this._toast.toast('User Name Already Exist', 3000);
+          if (err.message == 'sqlite3_step failure: UNIQUE constraint failed: User.DeviceId') {
+            this._toast.toast('DeviceId Already Exist', 3000);
+          } else {
+            this._toast.toast('User Name Already Exist', 3000);
+          }
         }
         console.log("**********err", err.message)
       })
