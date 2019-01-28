@@ -1,7 +1,7 @@
 {
     "querys": [
-        "Create Table IF NOT EXISTS User(UserId INTEGER PRIMARY KEY AUTOINCREMENT,CareProviderName varchar(30),PhysicianName varchar(30),Mobile varchar(12),UserName varchar(20) UNIQUE,Password varchar(20),Location varchar(200),DeviceId varchar(20) UNIQUE,CreatedTime varchar(50) ,UpdatedTime varchar(50), Daenerys Integer)",
-        "Create Table IF NOT EXISTS SensorReadings(ReadingId INTEGER PRIMARY KEY AUTOINCREMENT,UserId Integer,DeviceId varchar(20) UNIQUE,Temperature DECIMAL(10,2), Moisture DECIMAL(10,2),Pressure DECIMAL(10,2),MediaUrl varchar(200),SkinCondition Integer,CreatedTime varchar(50) ,UpdatedTime varchar(50))",
+        "Create Table IF NOT EXISTS User(UserId INTEGER PRIMARY KEY AUTOINCREMENT,CareProviderName varchar(30),PhysicianName varchar(30),Mobile varchar(12),UserName varchar(20) UNIQUE,Password varchar(20),Location varchar(200),DeviceId varchar(20) UNIQUE,CreatedTime varchar(50),UpdatedTime varchar(50),Daenerys INTEGER)",
+        "Create Table IF NOT EXISTS SensorReadings(ReadingId INTEGER PRIMARY KEY AUTOINCREMENT,UserId Integer,DeviceId varchar(20),Temperature DECIMAL(10,2), Moisture DECIMAL(10,2),Pressure DECIMAL(10,2),MediaUrl varchar(200),SkinCondition Integer,CreatedTime varchar(50) ,UpdatedTime varchar(50))",
         "Create Table IF NOT EXISTS Media(MediaId INTEGER PRIMARY KEY AUTOINCREMENT,UserId Integer,DeviceId varchar(20) UNIQUE, MediaUrl varchar(50),CreatedTime varchar(50) ,UpdatedTime varchar(50))"
     ]
 }
