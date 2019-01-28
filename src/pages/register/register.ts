@@ -68,7 +68,6 @@ export class RegisterPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.nativeGeocoder.reverseGeocode(resp.coords.latitude, resp.coords.longitude, options)
         .then((result: NativeGeocoderReverseResult[]) => {
-          console.log(JSON.stringify(result[0]))
           const location = `${result[0].subAdministrativeArea} ${result[0].subLocality} ${result[0].locality} ${result[0].administrativeArea} ${result[0].countryName} ${result[0].postalCode}`
           this.register.patchValue({ 'location': location });
           // this._toast.toast(`Location get successfully `, 3000);
@@ -96,13 +95,14 @@ export class RegisterPage {
       this.register.get('deviceId').markAsDirty();
     } else {
       let date = new Date();
-      let daenerys;
+      let daenerys = 0;
       if (formData.value['Daenerys']) {
         daenerys = 1;
       } else {
         daenerys = 0;
       }
       let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId,CreatedTime,UpdatedTime,Daenerys) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}',${daenerys})`
+     
       this._db.executeQuery(query).then((res) => {
         formData.value['UserId'] = res['insertId'];
         const userData = {

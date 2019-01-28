@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
 import { ToastProvider } from '../../providers/toast/toast';
@@ -19,13 +19,14 @@ export class ProfilePage implements OnInit {
   }
   brightness = 0;
   location;
-  imageToBeUpload='';
+  imageToBeUpload = '';
   constructor(public navParams: NavParams,
     private photoViewer: PhotoViewer,
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
     private _toast: ToastProvider,
-    public _db: DbInitProvider
+    public _db: DbInitProvider,
+    public popoverCtrl: PopoverController
   ) {
   }
   ngOnInit() {
@@ -43,33 +44,37 @@ export class ProfilePage implements OnInit {
 
   getReading() {
     if (this.validateSensoorList()) {
-      // AND CreatedTime > DATE_SUB(curdate(), INTERVAL 1 DAY)
-      let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 1 DAY)'`
+      // 'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 1 DAY)'
+      // let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}`
+      // this._db.executeQuery(query).then((res: any) => {
+      // if (res.rows.length == 0) {
+      let date = new Date();
+      let query = `INSERT INTO SensorReadings(UserId ,DeviceId,Temperature, Moisture ,Pressure ,MediaUrl,SkinCondition,CreatedTime,UpdatedTime) VALUES  (${this.location['UserId']},'${this.location['DeviceId']}','${this.sensoor['temperature']}','${this.sensoor['moisture']}','${this.sensoor['pressure']}','${this.imageToBeUpload}',${this.brightness},'${date}','${date}')`
+      console.log("query", query)
       this._db.executeQuery(query).then((res: any) => {
-        if (res.rows.length == 0) {
-          let date = new Date();
-          let query = `INSERT INTO SensorReadings(UserId ,DeviceId,Temperature, Moisture ,Pressure ,CreatedTime,UpdatedTime) VALUES  (${this.location['UserId']},'${this.location['DeviceId']}','${this.sensoor['temperature']}','${this.sensoor['moisture']}','${this.sensoor['pressure']}','${date}','${date}')`
-          console.log("query", query)
-          this._db.executeQuery(query).then((res: any) => {
-            console.log("***",res)
-            // if (res.rows.length) {
-              this._toast.toast(`SensorReadings insert successfully `, 3000);
-            // }
-          }).catch(e => {
-            console.log("err***************", e)
-          })
-        } else {
-          this._toast.toast(`User Already Set SensorReadings `, 3000);
-        }
+        console.log("***", res)
+        // if (res.rows.length) {
+
+        const popover = this.popoverCtrl.create('MessagePage');
+        popover.present();
+        this._toast.toast(`SensorReadings insert successfully `, 3000);
+        // }
       }).catch(e => {
-        this._toast.toast(`Query fail`, 3000);
-        console.log("err", e)
+        console.log("err***************", e)
       })
-
-
     } else {
-      this._toast.toast(`All Sensoor Fileds are required`, 3000);
+      this._toast.toast(`User Already Set SensorReadings `, 3000);
     }
+    // }).catch(e => {
+    // this._toast.toast(`Query fail`, 3000);
+    // console.log("err", e)
+    // })
+
+
+    // }
+    //  else {
+    // this._toast.toast(`All Sensoor Fileds are required`, 3000);
+    // }
 
   }
 
