@@ -75,9 +75,9 @@
           </ion-col>
         </ion-row>
       </ion-col>
-      <ion-col col-6 style="text-align:right;">
-        <button class="btn" (click)="getReading()" ion-button>Get Readings</button>
-      </ion-col>
+      <!-- <ion-col col-6 style="text-align:right;">
+        <button class="btn"  ion-button>Get Readings</button>
+      </ion-col> -->
     </ion-row>
   </ion-grid>
 
@@ -110,15 +110,12 @@
           </ion-range>
         </ion-item>
       </ion-col>
-      <div style="text-align:right;width:99%;">
-        <button class="btn" (click)="getReading()" ion-button>Store Image</button>
-      </div>
     </ion-row>
     <!-- </ion-col>
     </ion-row> -->
   </ion-grid>
   <div margin>
-    <button color="secondary" ion-button block>Evaluate Pressure Ulcer</button>
+    <button color="secondary" ion-button block (click)="getReading()">Evaluate Pressure Ulcer</button>
   </div>
   <div style="margin:5px; border: 2px solid #49c2f3;">
     <ion-grid style="background:#cde8f3 !important;">
