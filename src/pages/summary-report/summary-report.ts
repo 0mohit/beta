@@ -26,12 +26,10 @@ export class SummaryReportPage {
         labels: [1, 2, 3, 4, 5, 6, 7, 8, 9],
         datasets: [
           {
-            label: 'sahb',
-
+            label: 'Tempetature',
             fill: false,
             usePointStyle: true,
             lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
             borderColor: "rgba(75,192,192,1)",
             borderWidth: 0,
             borderHeight: 2,
@@ -51,6 +49,7 @@ export class SummaryReportPage {
             data: [35, 30, 25, 20, 15, 10, 5, 0],
             spanGaps: false,
           }, {
+            label: 'Moisture %RH',
             fill: false,
             lineTension: 0.1,
             borderWidth: 0,
@@ -72,6 +71,7 @@ export class SummaryReportPage {
             data: [20.5, 21, 21.5, 22, 22.5, 23],
             spanGaps: false,
           }, {
+            label: 'Force/Pressure mmHg',
             fill: false,
             lineTension: 0.1,
             borderWidth: 0,
@@ -135,6 +135,7 @@ export class SummaryReportPage {
               display: false,
             }, ticks: {
               fontColor: "#CCC", // this here
+              // padding:10
             },
           }],
           yAxes: [{
@@ -149,7 +150,12 @@ export class SummaryReportPage {
             }, ticks: {
               beginAtZero: true,
               fontColor: "#CCC", // this here
+              max: 35,
+              min: 0,
+              stepSize: 5,
+              padding: 10,
             },
+      
           }]
         }
       }

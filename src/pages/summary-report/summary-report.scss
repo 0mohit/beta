@@ -3,5 +3,60 @@ page-summary-report {
 
     .chartjs-render-monitor{
         background: linear-gradient(to right, rgb(150, 150, 150) 0%, rgb(132, 132, 136) 0%, rgb(123, 123, 123) 11%, rgb(142, 142, 142) 29%, rgb(82, 82, 82) 71%, rgb(105, 105, 105) 90%);
+        width: 100%;
+        height: 225px;
     }
+    .itemBorder{
+        background: #a1a1a2;
+        color: white;
+        font-weight: bold;
+        font-size: 1.4em;
+        width: 100%;
+        padding: 10px;
+    }
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted #5b5765;
+      }
+      
+      .tooltip .tooltiptext {
+        width: 89%;
+        background-color: #5b5765;
+        color: #fff;
+        /* text-align: center; */
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        font-size: .6em;
+        top: 135%;
+        left: 22%;
+        padding-top: 10px;
+         margin-left: -60px;
+      }
+      
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 12%;
+        margin-left: -5px;
+        border-width: 18px;
+        border-style: solid;
+        border-color: transparent transparent #5b5765 transparent;
+      }
+      .item{
+        background: #55506d;
+        color: white;
+        padding-left: 10px;
+        font-size: 1em;
+        .input-wrapper{
+            display: unset !important;
+        }
+        .label {
+            margin: 2px 8px 13px 0;
+        }
+      }
+
 }

@@ -11,12 +11,23 @@
 
 
 <ion-content>
-  <!-- <ion-card>
-    <ion-card-header>
-      Line Chart
-    </ion-card-header>
-    <ion-card-content> -->
+
+  <div class="tooltip itemBorder"> Summary Report
+
+    <span class="tooltiptext">
+      <ion-item no-lines no-padding>
+        Pressure Reading (Last 6 days)
+      </ion-item>
+    </span>
+  </div>
+  <ion-card style="margin-top: 80px; border-radius: 6px;">
+    <ion-card-content no-padding>
       <canvas #lineCanvas></canvas>
-    <!-- </ion-card-content>
-  </ion-card> -->
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="theam">
+    <footer-bottom></footer-bottom>
+  </ion-toolbar>
+</ion-footer>
