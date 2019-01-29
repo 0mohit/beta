@@ -26,7 +26,8 @@ export class ProfilePage implements OnInit {
     public actionSheetCtrl: ActionSheetController,
     private _toast: ToastProvider,
     public _db: DbInitProvider,
-    public popoverCtrl: PopoverController
+    public popoverCtrl: PopoverController,
+    public nav: NavController
   ) {
   }
   ngOnInit() {
@@ -43,6 +44,11 @@ export class ProfilePage implements OnInit {
   }
 
   getReading() {
+    const popover = this.popoverCtrl.create('MessagePage');
+    popover.present();
+    popover.onDidDismiss(data => {
+      this.nav.push('SummaryReportPage');
+    })
     if (this.validateSensoorList()) {
       // 'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 1 DAY)'
       // let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}`
@@ -54,10 +60,20 @@ export class ProfilePage implements OnInit {
       this._db.executeQuery(query).then((res: any) => {
         console.log("***", res)
         // if (res.rows.length) {
-
+        this.sensoor = {
+          temperature: null,
+          moisture: null,
+          pressure: null
+        }
+        this.brightness = null;
+        this.imageToBeUpload = null;
         const popover = this.popoverCtrl.create('MessagePage');
         popover.present();
-        this._toast.toast(`SensorReadings insert successfully `, 3000);
+        popover.onDidDismiss(data => {
+          this.nav.push('SummaryReportPage');
+        })
+        // this.navParams.
+        // this._toast.toast(`SensorReadings insert successfully `, 3000);
         // }
       }).catch(e => {
         console.log("err***************", e)

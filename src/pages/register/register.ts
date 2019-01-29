@@ -42,7 +42,7 @@ export class RegisterPage {
       ]
     );
 
-    this.getLocation();
+    // this.getLocation();
 
 
   }
@@ -102,7 +102,6 @@ export class RegisterPage {
         daenerys = 0;
       }
       let query = `INSERT INTO User (CareProviderName,PhysicianName,Mobile,UserName,Password,Location,DeviceId,CreatedTime,UpdatedTime,Daenerys) VALUES  ('${formData.value['careProviderName']}','${formData.value['physicinName']}',${formData.value['mobile']},'${formData.value['userName']}','${formData.value['password']}','${formData.value['location']}','${formData.value['deviceId']}','${date}','${date}',${daenerys})`
-      console.log("---query",query)
       this._db.executeQuery(query).then((res) => {
         formData.value['UserId'] = res['insertId'];
         const userData = {
