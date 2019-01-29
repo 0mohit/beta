@@ -113,7 +113,7 @@ export class SummaryReportPage {
           padding: {
             left: -20,
             right: 10,
-            top: 0,
+            top: -5,
             bottom: 0
           }
         },
@@ -129,7 +129,9 @@ export class SummaryReportPage {
           xAxes: [{
             display: true,
             gridLines: {
-              display: false
+              display: false,
+              drawTicks: false,
+              drawBorder: false
             },
             scaleLabel: {
               display: false,
@@ -139,23 +141,33 @@ export class SummaryReportPage {
             },
           }],
           yAxes: [{
+            labelAutoFit: true,
             display: true,
             gridLines: {
               display: true,
-              color: "#FFF"
+              color: "#FFF",
+              drawTicks: false,
+              drawBorder: false,
+
             },
             scaleLabel: {
               display: true,
-              fontSize: 15
+              fontSize: 17,
+              
             }, ticks: {
+              autoSkip: true,
               beginAtZero: true,
               fontColor: "#CCC", // this here
               max: 35,
               min: 0,
               stepSize: 5,
+              length:2,
               padding: 10,
+            //   callback: function(value, index, values) {
+            //     return value;
+            // }
             },
-      
+
           }]
         }
       }
