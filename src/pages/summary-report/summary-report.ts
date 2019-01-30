@@ -29,7 +29,7 @@ export class SummaryReportPage {
             label: 'Tempetature',
             fill: false,
             usePointStyle: true,
-            lineTension: 0.1,
+            lineTension: 0.5,
             borderColor: "rgba(75,192,192,1)",
             borderWidth: 0,
             borderHeight: 2,
@@ -39,6 +39,7 @@ export class SummaryReportPage {
             borderJoinStyle: 'round',
             pointBorderColor: "rgba(75,192,192,1)",
             pointBackgroundColor: "#fff",
+            pointBackgroundStyle: '',
             pointBorderWidth: 1,
             pointHoverRadius: 5,
             pointHoverBackgroundColor: "rgba(75,192,192,1)",
@@ -59,7 +60,8 @@ export class SummaryReportPage {
             borderDash: [],
             borderDashOffset: 0.0,
             borderJoinStyle: 'butt',
-            pointBorderColor: "rgba(230, 126, 34, 1)",
+            pointBorderColor: '#fff',
+            pointStyle: 'rect',
             pointBackgroundColor: "#fff",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
@@ -113,15 +115,18 @@ export class SummaryReportPage {
           padding: {
             left: -20,
             right: 10,
-            top: -5,
+            top: 0,
             bottom: 0
           }
         },
         legend: {
           display: true,
+          fullWidth: true,
           position: 'bottom',
           labels: {
-            fontColor: 'white'
+            fontColor: 'white',
+            padding: 20,
+            fontSize: 8
           },
 
         },
@@ -131,7 +136,7 @@ export class SummaryReportPage {
             gridLines: {
               display: false,
               drawTicks: false,
-              drawBorder: false
+              drawBorder: false,
             },
             scaleLabel: {
               display: false,
@@ -145,15 +150,15 @@ export class SummaryReportPage {
             display: true,
             gridLines: {
               display: true,
-              color: "#FFF",
+              color: "whitesmoke",
               drawTicks: false,
               drawBorder: false,
-
+              lineWidth: 0.5,
             },
             scaleLabel: {
               display: true,
               fontSize: 17,
-              
+
             }, ticks: {
               autoSkip: true,
               beginAtZero: true,
@@ -161,11 +166,11 @@ export class SummaryReportPage {
               max: 35,
               min: 0,
               stepSize: 5,
-              length:2,
+              length: 2,
               padding: 10,
-            //   callback: function(value, index, values) {
-            //     return value;
-            // }
+              //   callback: function(value, index, values) {
+              //     return value;
+              // }
             },
 
           }]
