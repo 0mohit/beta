@@ -1,11 +1,9 @@
 <ion-header>
-
   <ion-navbar color="white">
     <img class="headerImg" src="assets/imgs/vCareLogo.jpg" alt="">
     <img class="headerImg" padding-right float-right src="assets/imgs/BetaMedTech_Logo.jpg" alt="">
   </ion-navbar>
   <div class="border-header"></div>
-
 </ion-header>
 
 
@@ -15,28 +13,35 @@
       <ion-list-header class="title">
         Sign-Up
       </ion-list-header>
+
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="careProviderName" placeholder="Care Provider Name"></ion-input>
       </ion-item>
+
       <div padding margin-left class="red" *ngIf="register.controls.careProviderName.value=='' && !register.controls.careProviderName.valid && register.controls.careProviderName.dirty">
         Care Provider Name is required.
       </div>
+
       <div padding margin-left class="red" *ngIf="register.controls['careProviderName'].hasError('maxlength')">
-        CareProviderName can not exceed more then 30 characters</div>
+        CareProviderName can not exceed more then 30 characters
+      </div>
 
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="physicinName" placeholder="Physicin Name"></ion-input>
       </ion-item>
+
       <div padding margin-left class="red" *ngIf="register.controls.physicinName.value=='' &&  !register.controls.physicinName.valid && register.controls.physicinName.dirty">
         Physicin Name is required.
       </div>
 
       <div padding margin-left class="red" *ngIf="register.controls['physicinName'].hasError('maxlength')">Physicin
-        Name can not exceed more then 30 characters</div>
+        Name can not exceed more then 30 characters
+      </div>
 
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="number" formControlName="mobile" placeholder="Mobile"></ion-input>
       </ion-item>
+
       <div padding margin-left class="red" *ngIf="register.controls.mobile.value=='' && !register.controls.mobile.valid && register.controls.mobile.dirty">
         Mobile Number is required.
       </div>
@@ -44,8 +49,6 @@
         characters with a mix of letters</div>
       <div padding margin-left class="red" *ngIf="register.controls['mobile'].hasError('maxlength')">Use 12 or less
         characters with a max of letters</div>
-
-
 
       <ion-item class="margin-botton-five" no-lines>
         <ion-input type="text" formControlName="userName" placeholder="User Name"></ion-input>
@@ -104,7 +107,7 @@
         </span>
       </ion-item>
     </ion-list>
-    <button ion-button round color="light" (click)="testTable()">TEST</button>
+    <!-- <button ion-button round color="light" (click)="testTable()">TEST</button> -->
     <ion-list>
       <ion-item no-lines no-padding>
         <ion-label>Daenerys Targaryen</ion-label>

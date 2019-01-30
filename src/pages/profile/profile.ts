@@ -44,11 +44,7 @@ export class ProfilePage implements OnInit {
   }
 
   getReading() {
-    const popover = this.popoverCtrl.create('MessagePage');
-    popover.present();
-    popover.onDidDismiss(data => {
-      this.nav.push('SummaryReportPage');
-    })
+
     if (this.validateSensoorList()) {
       // 'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 1 DAY)'
       // let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}`

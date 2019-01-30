@@ -2,5 +2,7 @@ page-register {
   ion-checkbox{
     margin: 10px !important;
   }
-
+  .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    box-shadow: inset 0 0px 0 0 #f53d3d;
+  }
 }
