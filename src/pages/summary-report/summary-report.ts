@@ -12,6 +12,9 @@ export class SummaryReportPage {
   @ViewChild('lineCanvas') lineCanvas;
   lineChart: any;
   location;
+  moisture = [];
+  temprature = [];
+  pressure = [];
   option = {
     responsive: true,
     title: {
@@ -41,7 +44,8 @@ export class SummaryReportPage {
       labels: {
         fontColor: 'white',
         padding: 20,
-        fontSize: 8
+        fontSize: 7,
+        width:10
       },
 
     },
@@ -79,7 +83,7 @@ export class SummaryReportPage {
           fontColor: "#CCC", // this here
           max: 35,
           min: 0,
-          stepSize: 5,
+          // stepSize: 5,
           length: 2,
           padding: 10,
           //   callback: function(value, index, values) {
@@ -106,9 +110,19 @@ export class SummaryReportPage {
   }
 
   initGraph() {
-    let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']} 'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 6 DAY)'`
+    let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}' AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 6 DAY)'`
+    console.log("query", query)
     this._db.executeQuery(query).then((res: any) => {
-      console.log("res******", res)
+      for (let i = 0; i < res.rows.length; i++) {
+        console.log("res******", res.rows.item(i))
+        let data = res.rows.item(i);
+        this.temprature.push(data['Temperature']);
+        this.moisture.push(data['Moisture']);
+        this.pressure.push(data['Pressure']);
+      }
+
+      console.log("sensor", this.moisture, this.temprature, this.pressure);
+      this.createDataForGraph();
     }).catch(e => {
       console.log("err***************", e)
     })
@@ -142,7 +156,7 @@ export class SummaryReportPage {
       pointBorderColor: "rgba(75,192,192,1)",
       pointHoverBackgroundColor: "rgba(75,192,192,1)",
       pointHoverBorderColor: "rgba(220,220,220,1)",
-      data: [35, 30, 25, 20, 15, 10, 5, 0],
+      data: this.temprature,
     }
     temprature = Object.assign(temprature, commanData)
     let moisture = {
@@ -151,7 +165,7 @@ export class SummaryReportPage {
       borderColor: "rgba(230, 126, 34, 1)",
       pointHoverBackgroundColor: "rgba(230, 126, 34, 1)",
       pointHoverBorderColor: "rgba(230, 126, 34, 1)",
-      data: [20.5, 21, 21.5, 22, 22.5, 23],
+      data: this.moisture,
     }
     moisture = Object.assign(moisture, commanData)
 
@@ -163,7 +177,7 @@ export class SummaryReportPage {
       pointBackgroundColor: "#fff",
       pointHoverBackgroundColor: "rgba(230, 126, 34, 1)",
       pointHoverBorderColor: "rgba(230, 126, 34, 1)",
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      data: this.pressure,
     };
     Pressure = Object.assign(Pressure, commanData);
 
