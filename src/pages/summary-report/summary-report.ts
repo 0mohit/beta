@@ -37,15 +37,17 @@ export class SummaryReportPage {
         bottom: 0
       }
     },
+
     legend: {
       display: true,
-      fullWidth: true,
+      // fullWidth: true,
       position: 'bottom',
       labels: {
         fontColor: 'white',
         padding: 20,
-        fontSize: 7,
-        width:10
+        fontSize: 8,
+        useLineStyle: true,
+        boxWidth: 10
       },
 
     },
@@ -61,7 +63,8 @@ export class SummaryReportPage {
           display: false,
         }, ticks: {
           fontColor: "#CCC", // this here
-          // padding:10
+          fontSize: 9,
+          padding: 5
         },
       }],
       yAxes: [{
@@ -76,14 +79,14 @@ export class SummaryReportPage {
         },
         scaleLabel: {
           display: true,
-          fontSize: 17,
         }, ticks: {
           autoSkip: true,
           beginAtZero: true,
+          fontSize: 9,
           fontColor: "#CCC", // this here
           max: 35,
           min: 0,
-          // stepSize: 5,
+          stepSize: 5,
           length: 2,
           padding: 10,
           //   callback: function(value, index, values) {
@@ -152,10 +155,10 @@ export class SummaryReportPage {
     }
     let temprature = {
       label: 'Tempetature',
-      borderColor: "rgba(75,192,192,1)",
-      pointBorderColor: "rgba(75,192,192,1)",
-      pointHoverBackgroundColor: "rgba(75,192,192,1)",
-      pointHoverBorderColor: "rgba(220,220,220,1)",
+      borderColor: "rgba(0, 181, 204, 1)",
+      pointBorderColor: "rgba(0, 181, 204, 1)",
+      pointHoverBackgroundColor: "rgba(0, 181, 204, 1)",
+      pointHoverBorderColor: "rgba(0, 181, 204, 1)",
       data: this.temprature,
     }
     temprature = Object.assign(temprature, commanData)
@@ -171,12 +174,11 @@ export class SummaryReportPage {
 
     let Pressure = {
       label: 'Force/Pressure mmHg',
-      backgroundColor: "rgba(230, 126, 34, 1)",
-      borderColor: "rgba(230, 126, 34, 1)",
-      pointBorderColor: "rgba(230, 126, 34, 1)",
-      pointBackgroundColor: "#fff",
-      pointHoverBackgroundColor: "rgba(230, 126, 34, 1)",
-      pointHoverBorderColor: "rgba(230, 126, 34, 1)",
+      backgroundColor: "rgba(191, 191, 191, 1)",
+      borderColor: "rgba(191, 191, 191, 1)",
+      pointBorderColor: "rgba(191, 191, 191, 1)",
+      pointHoverBackgroundColor: "rgba(191, 191, 191, 1)",
+      pointHoverBorderColor: "rgba(191, 191, 191, 1)",
       data: this.pressure,
     };
     Pressure = Object.assign(Pressure, commanData);
