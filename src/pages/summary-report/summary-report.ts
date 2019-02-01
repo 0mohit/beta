@@ -47,7 +47,7 @@ export class SummaryReportPage {
         padding: 20,
         fontSize: 8,
         useLineStyle: true,
-        boxWidth: 10
+        boxWidth: 15
       },
 
     },
@@ -114,17 +114,13 @@ export class SummaryReportPage {
 
   initGraph() {
     let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}' AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 6 DAY)'`
-    console.log("query", query)
     this._db.executeQuery(query).then((res: any) => {
       for (let i = 0; i < res.rows.length; i++) {
-        console.log("res******", res.rows.item(i))
         let data = res.rows.item(i);
         this.temprature.push(data['Temperature']);
         this.moisture.push(data['Moisture']);
         this.pressure.push(data['Pressure']);
       }
-
-      console.log("sensor", this.moisture, this.temprature, this.pressure);
       this.createDataForGraph();
     }).catch(e => {
       console.log("err***************", e)
@@ -155,6 +151,7 @@ export class SummaryReportPage {
     }
     let temprature = {
       label: 'Tempetature',
+      backgroundColor:"rgba(0, 181, 204, 1)",
       borderColor: "rgba(0, 181, 204, 1)",
       pointBorderColor: "rgba(0, 181, 204, 1)",
       pointHoverBackgroundColor: "rgba(0, 181, 204, 1)",
