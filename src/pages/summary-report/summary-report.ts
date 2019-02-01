@@ -20,7 +20,8 @@ export class SummaryReportPage {
     title: {
       display: true,
       text: 'Parient Reading Trends',
-      fontColor: 'white'
+      fontColor: 'white',
+      fontSize:8
     },
     tooltips: {
       mode: 'label',
@@ -45,9 +46,9 @@ export class SummaryReportPage {
       labels: {
         fontColor: 'white',
         padding: 20,
-        fontSize: 8,
+        fontSize: 6,
         useLineStyle: true,
-        boxWidth: 15
+        boxWidth: 30
       },
 
     },
@@ -63,7 +64,7 @@ export class SummaryReportPage {
           display: false,
         }, ticks: {
           fontColor: "#CCC", // this here
-          fontSize: 9,
+          fontSize: 6,
           padding: 5
         },
       }],
@@ -82,7 +83,7 @@ export class SummaryReportPage {
         }, ticks: {
           autoSkip: true,
           beginAtZero: true,
-          fontSize: 9,
+          fontSize: 5,
           fontColor: "#CCC", // this here
           max: 35,
           min: 0,
