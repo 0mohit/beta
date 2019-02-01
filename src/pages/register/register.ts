@@ -11,6 +11,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DbInitProvider } from './../../providers/db-init/db-init';
 import { ToastProvider } from '../../providers/toast/toast';
 import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,8 @@ export class RegisterPage {
     private geolocation: Geolocation,
     private _toast: ToastProvider,
     public _db: DbInitProvider,
-    public androidPermissions: AndroidPermissions
+    public androidPermissions: AndroidPermissions,
+    public loadingCtrl: LoadingController,
   ) {
     this.formInit();
   }
@@ -60,7 +62,11 @@ export class RegisterPage {
     }, PasswordValidation.MatchPassword);
 
   }
-  getLocation() {
+  async getLocation() {
+    let loading = await this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
     let options: NativeGeocoderOptions = {
       useLocale: true,
       maxResults: 5
@@ -71,8 +77,10 @@ export class RegisterPage {
           const location = `${result[0].subAdministrativeArea} ${result[0].subLocality} ${result[0].locality} ${result[0].administrativeArea} ${result[0].countryName} ${result[0].postalCode}`
           this.register.patchValue({ 'location': location });
           // this._toast.toast(`Location get successfully `, 3000);
+          loading.dismiss();
         })
         .catch((error: any) => {
+          loading.dismiss();
           // this._toast.toast(`Location is required `, 3000)
         });
 
@@ -132,9 +140,9 @@ export class RegisterPage {
       })
     }
   }
-  testTable(){
+  testTable() {
     this._db.executeQuery('PRAGMA table_info(User)').then((res) => {
-    console.log("--test response:",res)
-  })
-}
+      console.log("--test response:", res)
+    })
+  }
 }
