@@ -12,18 +12,21 @@
   <div class="tooltip itemBorder"> Summary Report
 
     <span class="tooltiptext">
-      <ion-item class="title" no-lines no-padding>
+      <ion-item  no-lines class="title " style=" margin: 0; text-align: center; " no-lines no-padding>
         Pressure Reading (Last 6 days)
       </ion-item>
-      <ion-item>
-        <span *ngFor="let data of pressure">
-          <ion-icon *ngIf="data['pressure']*1 < 20 " class="presorIcon" name="checkbox"></ion-icon>
-          <ion-icon *ngIf="data['pressure']*1 >= 20 " class="presorIcon" name="person"></ion-icon> : {{data.date}}
+      <ion-item no-lines>
+        <span *ngIf="pressureData">
+          <span *ngFor="let data of pressureData">
+            <ion-icon *ngIf="data['pressure']*1 < 20 " class="presorIcon" name="checkbox"></ion-icon>
+            <ion-icon *ngIf="data['pressure']*1 >= 20 " class="presorIcon" name="person"></ion-icon> : {{data.date |
+            date : 'd MMMM'}}
+          </span>
         </span>
       </ion-item>
     </span>
   </div>
-  <ion-card style="margin-top: 80px; border-radius: 6px;">
+  <ion-card style="margin-top: 150px; border-radius: 6px;">
     <ion-card-content no-padding>
       <canvas #lineCanvas></canvas>
     </ion-card-content>

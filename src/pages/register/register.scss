@@ -5,4 +5,21 @@ page-register {
   .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
     box-shadow: inset 0 0px 0 0 #f53d3d;
   }
+  .list-header-ios{
+    padding-bottom: 10px !important;
+  }
+
+  form .item-ios{
+    margin-top: 8px;
+  }
+
+  .item-ios{
+    .checkbox .checkbox-checked .checkbox-inner, page-login .checkbox .checkbox-checked .checkbox-inner {
+      left: 10px !important;
+      top: 3px !important;
+      position: absolute;
+      width: 5px;
+      height: 14px;
+  }
+  }
 }

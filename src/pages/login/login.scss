@@ -57,4 +57,21 @@ page-register,page-login {
   width: 100%;
   // min-height: 200px;
 }
+  .list-header-ios{
+    padding-bottom: 10px !important;
+  }
+
+  form .item-ios{
+    margin-top: 8px;
+  }
+
+  .item-ios{
+    .checkbox .checkbox-checked .checkbox-inner, page-login .checkbox .checkbox-checked .checkbox-inner {
+      left: 10px !important;
+      top: 3px !important;
+      position: absolute;
+      width: 5px;
+      height: 14px;
+  }
+  }
 }

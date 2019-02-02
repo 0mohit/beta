@@ -15,14 +15,14 @@ export class SummaryReportPage {
   moisture = [];
   temprature = [];
   pressure = [];
-  pressureData =[];
+  pressureData = [];
   option = {
     responsive: true,
     title: {
       display: true,
       text: 'Parient Reading Trends',
       fontColor: 'white',
-      fontSize:8
+      fontSize: 8
     },
     tooltips: {
       mode: 'label',
@@ -123,8 +123,8 @@ export class SummaryReportPage {
         this.moisture.push(data['Moisture']);
         this.pressure.push(data['Pressure']);
         this.pressureData.push({
-          pressure:data['Pressure'],
-          date:data['CreatedTime']
+          pressure: data['Pressure'],
+          date: data['CreatedTime']
         })
       }
       this.createDataForGraph();
@@ -157,7 +157,7 @@ export class SummaryReportPage {
     }
     let temprature = {
       label: 'Tempetature',
-      backgroundColor:"rgba(0, 181, 204, 1)",
+      backgroundColor: "rgba(0, 181, 204, 1)",
       borderColor: "rgba(0, 181, 204, 1)",
       pointBorderColor: "rgba(0, 181, 204, 1)",
       pointHoverBackgroundColor: "rgba(0, 181, 204, 1)",
