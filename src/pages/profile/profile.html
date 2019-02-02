@@ -117,7 +117,7 @@
   <div margin>
     <button color="secondary" ion-button block (click)="getReading()">Evaluate Pressure Ulcer</button>
   </div>
-  <div style="margin:5px; border: 2px solid #49c2f3;">
+  <div class="tooltip" style="margin:5px; border: 2px solid #49c2f3;">
     <ion-grid style="background:#cde8f3 !important;">
       <ion-row>
         <ion-col col-5>
@@ -132,6 +132,9 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    <span [ngClass]="{tooltiptext : true , tooltipAddition:true ,none:displayNone}">
+      <p> Please use our pressure ulcer patch for prevention </p>
+    </span>
   </div>
 </ion-content>
 <ion-footer>

@@ -34,8 +34,37 @@ input{
     text-transform: capitalize;
 }
 
+.tooltipAddition{
+    font-size: 1em !important;
+    padding: 0 67px !important;
+    text-align: center;
+}
+.tooltip{
+    margin: 5px;
+    border: 2px solid #49c2f3;
+    width: 97%;
+}
+.none{
+    display: none;
+}
 .badge {
     border: 2px solid white;
     border-radius: 110px;
+}
+.itemList{
+    background: #55506d;
+    color: white;
+    padding-left: 10px;
+    font-size: 1em;
+    .input-wrapper{
+        display: unset !important;
+    }
+    .label {
+        margin: 2px 8px 13px 0;
+    }
+  }
+    .title{
+        margin-left: 10%;
+        font-size: 1.5rem;
 }
 }

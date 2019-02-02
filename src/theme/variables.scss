@@ -146,3 +146,45 @@ $colors: (
   width: 94%;
   margin: 10px;
 }
+
+
+.itemBorder{
+  background: #a1a1a2;
+  color: white;
+  font-weight: bold;
+  font-size: 1.4em;
+  width: 100%;
+  padding: 10px;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #5b5765;
+}
+
+.tooltip .tooltiptext {
+  width: 89%;
+  background-color: #5b5765;
+  color: #fff;
+  /* text-align: center; */
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  font-size: .6em;
+  top: 135%;
+  left: 22%;
+  padding-top: 10px;
+   margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 12%;
+  margin-left: -5px;
+  border-width: 18px;
+  border-style: solid;
+  border-color: transparent transparent #5b5765 transparent;
+}

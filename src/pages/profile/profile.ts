@@ -18,6 +18,7 @@ export class ProfilePage implements OnInit {
     pressure: null
   }
   brightness = 0;
+  displayNone = true;
   location;
   imageToBeUpload = '';
   constructor(public navParams: NavParams,
@@ -54,6 +55,7 @@ export class ProfilePage implements OnInit {
       let query = `INSERT INTO SensorReadings(UserId ,DeviceId,Temperature, Moisture ,Pressure ,MediaUrl,SkinCondition,CreatedTime,UpdatedTime) VALUES  (${this.location['UserId']},'${this.location['DeviceId']}','${this.sensoor['temperature']}','${this.sensoor['moisture']}','${this.sensoor['pressure']}','${this.imageToBeUpload}',${this.brightness},'${date}','${date}')`
       console.log("query", query)
       this._db.executeQuery(query).then((res: any) => {
+        this.displayNone = false;
         console.log("***", res)
         // if (res.rows.length) {
         this.sensoor = {
@@ -63,11 +65,7 @@ export class ProfilePage implements OnInit {
         }
         this.brightness = null;
         this.imageToBeUpload = null;
-        const popover = this.popoverCtrl.create('MessagePage');
-        popover.present();
-        popover.onDidDismiss(data => {
-          this.nav.push('SummaryReportPage');
-        })
+        this.nav.push('SummaryReportPage');
         // this.navParams.
         // this._toast.toast(`SensorReadings insert successfully `, 3000);
         // }

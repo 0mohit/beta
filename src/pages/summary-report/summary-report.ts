@@ -15,6 +15,7 @@ export class SummaryReportPage {
   moisture = [];
   temprature = [];
   pressure = [];
+  pressureData =[];
   option = {
     responsive: true,
     title: {
@@ -85,7 +86,7 @@ export class SummaryReportPage {
           beginAtZero: true,
           fontSize: 5,
           fontColor: "#CCC", // this here
-          max: 35,
+          // max: 35,
           min: 0,
           stepSize: 5,
           length: 2,
@@ -121,6 +122,10 @@ export class SummaryReportPage {
         this.temprature.push(data['Temperature']);
         this.moisture.push(data['Moisture']);
         this.pressure.push(data['Pressure']);
+        this.pressureData.push({
+          pressure:data['Pressure'],
+          date:data['CreatedTime']
+        })
       }
       this.createDataForGraph();
     }).catch(e => {
