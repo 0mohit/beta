@@ -71,7 +71,25 @@ input{
     padding-left: 18px!important;
 }
 ion-icon {
-    font-size: 1.7em;
+    font-size: 1.4em;
     vertical-align: sub;
 }
+.content-ios{
+    ion-icon {
+        font-size: 1.8em !important;
+        vertical-align: sub;
+    } 
+}
+
+@media only screen and (max-width: 320px) {
+    .font1-2 {
+        font-size: 1em;
+    }
+    .font1 {
+        font-size: 1em;
+    }
+    ion-badge {
+        font-size: 1rem;
+    }
+  }
 }

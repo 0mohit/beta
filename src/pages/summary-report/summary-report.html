@@ -12,21 +12,27 @@
   <div class="tooltip itemBorder"> Summary Report
 
     <span class="tooltiptext">
-      <ion-item  no-lines class="title " style=" margin: 0; text-align: center; " no-lines no-padding>
+      <ion-item no-lines class="title " style=" margin: 0; text-align: center; " no-lines no-padding>
         Pressure Reading (Last 6 days)
       </ion-item>
       <ion-item no-lines>
-        <span *ngIf="pressureData">
-          <span *ngFor="let data of pressureData">
-            <ion-icon *ngIf="data['pressure']*1 < 20 " class="presorIcon" name="checkbox"></ion-icon>
-            <ion-icon *ngIf="data['pressure']*1 >= 20 " class="presorIcon" name="person"></ion-icon> : {{data.date |
-            date : 'd MMMM'}}
-          </span>
-        </span>
+
+        <ion-grid *ngIf="pressureData">
+          <ion-row>
+            <ion-col col-4 *ngFor="let data of pressureData">
+                <ion-icon *ngIf="data['pressure']*1 < 20 " class="presorIcon" name="checkbox"></ion-icon>
+                <ion-icon *ngIf="data['pressure']*1 >= 20 " class="presorIcon" name="person"></ion-icon>
+                <span style="vertical-align: super;color:rgb(246, 246, 41); padding-left: 5px; padding-right: 5px; font-size: 1.2em;">
+                  {{data.date | date : 'd/M'}}: {{data.pressure}}
+                </span>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
       </ion-item>
     </span>
   </div>
-  <ion-card style="margin-top: 150px; border-radius: 6px;">
+  <ion-card style="margin-top: 200px; border-radius: 6px;">
     <ion-card-content no-padding>
       <canvas #lineCanvas></canvas>
     </ion-card-content>

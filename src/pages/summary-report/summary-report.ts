@@ -126,6 +126,7 @@ export class SummaryReportPage {
           pressure: data['Pressure'],
           date: data['CreatedTime']
         })
+        console.log("this.pressureData", this.pressureData)
       }
       this.createDataForGraph();
     }).catch(e => {
