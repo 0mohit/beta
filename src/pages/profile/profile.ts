@@ -125,7 +125,6 @@ export class ProfilePage implements OnInit {
 
     this.camera.getPicture(cameraOptions)
       .then(filePath => {
-        console.log('filePath', filePath)
         let updatedUrl;
         if (filePath.indexOf('.jpg') !== -1) {
           updatedUrl = filePath.slice(0, filePath.lastIndexOf('.jpg') + 4);
@@ -135,8 +134,6 @@ export class ProfilePage implements OnInit {
           updatedUrl = filePath.slice(0, filePath.lastIndexOf('.jpeg') + 4);
         }
         var fileName = updatedUrl.substr(updatedUrl.lastIndexOf('/') + 1);
-
-        console.log("fileName", updatedUrl)
         this.imageToBeUpload = updatedUrl;
       },
         err => console.log(err));

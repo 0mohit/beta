@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 @Injectable()
 export class DbInitProvider {
     db: SQLiteObject
     constructor(private sqlite: SQLite, public http: HttpClient) {
         console.log('Hello DbInitProvider Provider');
+        this.CreatetimeToPressureUlcerLookup();
     }
 
     createSqlLiteDB() {
@@ -57,7 +58,7 @@ export class DbInitProvider {
                         console.log("***err", e)
                     });
                 } else {
-                    callback(true)
+                    callback(true);
                 }
             }
             createTable(res['querys'], (response) => {
@@ -67,6 +68,25 @@ export class DbInitProvider {
 
 
     }
+
+    CreatetimeToPressureUlcerLookup() {
+        let req = new XMLHttpRequest();
+        let url = 'assets/Time_To_PressureUlcer_Lookup/Time_To_PressureUlcer_Lookup.xlsx';
+        req.open("GET", url, true);
+        req.responseType = "arraybuffer";
+        req.onload = (e) => {
+            let data = new Uint8Array(req.response);
+            let workbook = XLSX.read(data, { type: "array" });
+            const wb: XLSX.WorkBook = XLSX.read(data, { type: "array" });
+            const ws: XLSX.WorkSheet = wb.Sheets[wb.SheetNames[0]];
+            let jsonData = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+            console.log("wb", jsonData)
+        };
+        req.send();
+    }
+
+
+
     executeQuery(query) {
         return new Promise((resolve, reject) => {
             this.db.executeSql(query, []).then((res) => {
