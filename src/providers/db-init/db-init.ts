@@ -69,8 +69,32 @@ export class DbInitProvider {
 
     }
 
+    createLookupTables(data) {
+        let createTable = (tables, callback) => {
+            let query = "";
+            for (let i = 0; i < tables.length; i++) {
+
+            }
+
+            // this.db.executeSql(`${first_data}`, []).then((res) => {
+            //     console.log("**********", res)
+            //     createTable(tables, callback);
+            // }).catch(e => {
+            //     createTable(tables, callback);
+            //     console.log("***err", e)
+            // });
+            // https://github.com/SheetJS/js-xlsx/tree/master/demos/typescript
+            // npm install xlsx
+        }
+
+        createTable(data, (response) => {
+            console.log("create query executed")
+        })
+    }
+
     CreatetimeToPressureUlcerLookup() {
         let req = new XMLHttpRequest();
+        let jsonData;
         let url = 'assets/Time_To_PressureUlcer_Lookup/Time_To_PressureUlcer_Lookup.xlsx';
         req.open("GET", url, true);
         req.responseType = "arraybuffer";
@@ -79,10 +103,11 @@ export class DbInitProvider {
             let workbook = XLSX.read(data, { type: "array" });
             const wb: XLSX.WorkBook = XLSX.read(data, { type: "array" });
             const ws: XLSX.WorkSheet = wb.Sheets[wb.SheetNames[0]];
-            let jsonData = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+            jsonData = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
             console.log("wb", jsonData)
         };
         req.send();
+        this.createLookupTables(jsonData.splice(0, 1)[0])
     }
 
 
