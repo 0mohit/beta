@@ -69,25 +69,113 @@ export class DbInitProvider {
 
     }
 
-    createLookupTables(data) {
-        let createTable = (tables, callback) => {
-            let query = "";
-            for (let i = 0; i < tables.length; i++) {
+    insertLookupTables(data) {
+        let inserTable = (tables, callback) => {
+            let firstRecord = tables.splice(0, 1)[0];
+            console.log("wb", firstRecord)
+            let TemperatureMin, TemperatureMax, MoistureMin, MoistureMax, pressureMin, pressureMax, AgeMin, AgeMax, WeightMin, WeightMax, PressureUlserMin, PressureUlserMax;
 
+            if (firstRecord[0].indexOf('-') != -1) {
+                let dataRange = firstRecord[0].split('-');
+                TemperatureMin = dataRange[0];
+                TemperatureMax = dataRange[1];
+            } else if (firstRecord[0].indexOf('>') != -1) {
+                let dataRange = firstRecord[0].split('>');
+                TemperatureMin = dataRange[1];
+                TemperatureMax = 100;
+            } else {
+                let dataRange = firstRecord[0].split('<');
+                TemperatureMin = 100;
+                TemperatureMax = dataRange[0];
             }
 
-            // this.db.executeSql(`${first_data}`, []).then((res) => {
-            //     console.log("**********", res)
-            //     createTable(tables, callback);
-            // }).catch(e => {
-            //     createTable(tables, callback);
-            //     console.log("***err", e)
-            // });
-            // https://github.com/SheetJS/js-xlsx/tree/master/demos/typescript
-            // npm install xlsx
+            if (firstRecord[1].indexOf('-') != -1) {
+                let dataRange = firstRecord[1].split('-');
+                MoistureMin = dataRange[0];
+                MoistureMax = dataRange[1];
+            } else if (firstRecord[1].indexOf('>') != -1) {
+                let dataRange = firstRecord[1].split('>');
+                MoistureMin = dataRange[1];
+                MoistureMax = 100;
+            } else {
+                let dataRange = firstRecord[1].split('<');
+                MoistureMin = 100;
+                MoistureMax = dataRange[0];
+            }
+
+            if (firstRecord[2].indexOf('-') != -1) {
+                let dataRange = firstRecord[2].split('-');
+                pressureMin = dataRange[0];
+                pressureMax = dataRange[1];
+            } else if (firstRecord[2].indexOf('>') != -1) {
+                let dataRange = firstRecord[2].split('>');
+                pressureMin = dataRange[1];
+                pressureMax = 100;
+            } else {
+                let dataRange = firstRecord[2].split('<');
+                pressureMin = 100;
+                pressureMax = dataRange[0];
+            }
+
+            if (firstRecord[3].indexOf('-') != -1) {
+                let dataRange = firstRecord[3].split('-');
+                AgeMin = dataRange[0];
+                AgeMax = dataRange[1];
+            } else if (firstRecord[3].indexOf('>') != -1) {
+                let dataRange = firstRecord[3].split('>');
+                AgeMin = dataRange[1];
+                AgeMax = 100;
+            } else {
+                let dataRange = firstRecord[3].split('<');
+                AgeMin = 100;
+                AgeMax = dataRange[0];
+            }
+
+            if (firstRecord[4].indexOf('-') != -1) {
+                let dataRange = firstRecord[4].split('-');
+                WeightMin = dataRange[0];
+                WeightMax = dataRange[1];
+            } else if (firstRecord[4].indexOf('>') != -1) {
+                let dataRange = firstRecord[4].split('>');
+                WeightMin = dataRange[1];
+                WeightMax = 100;
+            } else {
+                let dataRange = firstRecord[4].split('<');
+                WeightMin = 100;
+                WeightMax = dataRange[0];
+            }
+
+            if (firstRecord[5].indexOf('-') != -1) {
+                let dataRange = firstRecord[5].split('-');
+                PressureUlserMin = dataRange[0];
+                PressureUlserMax = dataRange[1];
+            } else if (firstRecord[5].indexOf('>') != -1) {
+                let dataRange = firstRecord[5].split('>');
+                PressureUlserMin = dataRange[1];
+                PressureUlserMax = 0;
+            } else {
+                let dataRange = firstRecord[5].split('<');
+                PressureUlserMin = 100;
+                PressureUlserMax = dataRange[0];
+            }
+
+            let query = `INSERT INTO SensorLookupTable(TemperatureMin,TemperatureMax,MoistureMin,MoistureMax,PressureMin,PressureMax,AgeMin,AgeMax,WeightMin,WeightMax,PressureUlserMin,PressureUlserMax) VALUES  (${TemperatureMin},${TemperatureMax},${MoistureMin},${MoistureMax},${pressureMin},${pressureMax},${AgeMin},${AgeMax},${WeightMin},${WeightMax},${PressureUlserMin},${PressureUlserMax})`
+            console.log("query", query)
+            // this.db.executeSql('query', []).then(() => {
+            if (tables.length != 0) {
+                inserTable(tables, callback)
+            } else {
+                callback(true);
+            }
+            // })
+            //     .catch(e => {
+            //         console.log("insert error", e)
+            //         // reject(e);
+            //     });
+
         }
 
-        createTable(data, (response) => {
+        inserTable(data, (response) => {
             console.log("create query executed")
         })
     }
@@ -104,10 +192,11 @@ export class DbInitProvider {
             const wb: XLSX.WorkBook = XLSX.read(data, { type: "array" });
             const ws: XLSX.WorkSheet = wb.Sheets[wb.SheetNames[0]];
             jsonData = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
-            console.log("wb", jsonData)
+            jsonData.splice(0, 1)[0]
+            this.insertLookupTables(jsonData)
+
         };
         req.send();
-        this.createLookupTables(jsonData.splice(0, 1)[0])
     }
 
 
