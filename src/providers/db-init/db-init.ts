@@ -70,9 +70,10 @@ export class DbInitProvider {
     }
 
     insertLookupTables(data) {
+        let values = '';
         let inserTable = (tables, callback) => {
             let firstRecord = tables.splice(0, 1)[0];
-            console.log("wb", firstRecord)
+            // console.log("wb", firstRecord)
             let TemperatureMin, TemperatureMax, MoistureMin, MoistureMax, pressureMin, pressureMax, AgeMin, AgeMax, WeightMin, WeightMax, PressureUlserMin, PressureUlserMax;
 
             if (firstRecord[0].indexOf('-') != -1) {
@@ -144,39 +145,42 @@ export class DbInitProvider {
                 WeightMin = 100;
                 WeightMax = dataRange[0];
             }
+            PressureUlserMin = firstRecord[5];
+            PressureUlserMax = firstRecord[5];
+            // if (firstRecord[5].indexOf('-') != -1) {
+            //     let dataRange = firstRecord[5].split('-');
+            //     PressureUlserMin = dataRange[0];
+            //     PressureUlserMax = dataRange[1];
+            // } else if (firstRecord[5].indexOf('>') != -1) {
+            //     let dataRange = firstRecord[5].split('>');
+            //     PressureUlserMin = dataRange[1];
+            //     PressureUlserMax = 0;
+            // } else {
+            //     let dataRange = firstRecord[5].split('<');
+            //     PressureUlserMin = 100;
+            //     PressureUlserMax = dataRange[0];
+            // }
+            values = `${values} (${TemperatureMin},${TemperatureMax},${MoistureMin},${MoistureMax},${pressureMin},${pressureMax},${AgeMin},${AgeMax},${WeightMin},${WeightMax},${PressureUlserMin},${PressureUlserMax}),`
+            // console.log(values)
 
-            if (firstRecord[5].indexOf('-') != -1) {
-                let dataRange = firstRecord[5].split('-');
-                PressureUlserMin = dataRange[0];
-                PressureUlserMax = dataRange[1];
-            } else if (firstRecord[5].indexOf('>') != -1) {
-                let dataRange = firstRecord[5].split('>');
-                PressureUlserMin = dataRange[1];
-                PressureUlserMax = 0;
-            } else {
-                let dataRange = firstRecord[5].split('<');
-                PressureUlserMin = 100;
-                PressureUlserMax = dataRange[0];
-            }
-
-            let query = `INSERT INTO SensorLookupTable(TemperatureMin,TemperatureMax,MoistureMin,MoistureMax,PressureMin,PressureMax,AgeMin,AgeMax,WeightMin,WeightMax,PressureUlserMin,PressureUlserMax) VALUES  (${TemperatureMin},${TemperatureMax},${MoistureMin},${MoistureMax},${pressureMin},${pressureMax},${AgeMin},${AgeMax},${WeightMin},${WeightMax},${PressureUlserMin},${PressureUlserMax})`
-            console.log("query", query)
-            // this.db.executeSql('query', []).then(() => {
             if (tables.length != 0) {
                 inserTable(tables, callback)
             } else {
-                callback(true);
+                // console.log(values)
+                callback(values);
             }
+        }
+
+        inserTable(data, (response) => {
+            response = response.slice(0, -1);
+            let query = `INSERT INTO SensorLookupTable(TemperatureMin,TemperatureMax,MoistureMin,MoistureMax,PressureMin,PressureMax,AgeMin,AgeMax,WeightMin,WeightMax,PressureUlserMin,PressureUlserMax) VALUES ${response}  `
+            console.log("query", query)
+            // this.db.executeSql('query', []).then(() => {
             // })
             //     .catch(e => {
             //         console.log("insert error", e)
             //         // reject(e);
             //     });
-
-        }
-
-        inserTable(data, (response) => {
-            console.log("create query executed")
         })
     }
 
