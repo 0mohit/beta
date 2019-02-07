@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 @Injectable()
 export class DbInitProvider {
     db: SQLiteObject
     constructor(private sqlite: SQLite, public http: HttpClient) {
         console.log('Hello DbInitProvider Provider');
-        this.CreatetimeToPressureUlcerLookup();
     }
 
     createSqlLiteDB() {
@@ -62,7 +61,8 @@ export class DbInitProvider {
                 }
             }
             createTable(res['querys'], (response) => {
-                console.log("create query executed")
+                console.log("create query executed");
+                this.createPressureUlcerLookup();
             })
         })
 
@@ -73,9 +73,7 @@ export class DbInitProvider {
         let values = '';
         let inserTable = (tables, callback) => {
             let firstRecord = tables.splice(0, 1)[0];
-            // console.log("wb", firstRecord)
-            let TemperatureMin, TemperatureMax, MoistureMin, MoistureMax, pressureMin, pressureMax, AgeMin, AgeMax, WeightMin, WeightMax, PressureUlserMin, PressureUlserMax;
-
+            let TemperatureMin, TemperatureMax, MoistureMin, MoistureMax, pressureMin, pressureMax, AgeMin, AgeMax, WeightMin, WeightMax, PressureUlser, PressureUlserMax;
             if (firstRecord[0].indexOf('-') != -1) {
                 let dataRange = firstRecord[0].split('-');
                 TemperatureMin = dataRange[0];
@@ -145,8 +143,7 @@ export class DbInitProvider {
                 WeightMin = 100;
                 WeightMax = dataRange[0];
             }
-            PressureUlserMin = firstRecord[5];
-            PressureUlserMax = firstRecord[5];
+            PressureUlser = firstRecord[5];
             // if (firstRecord[5].indexOf('-') != -1) {
             //     let dataRange = firstRecord[5].split('-');
             //     PressureUlserMin = dataRange[0];
@@ -160,9 +157,7 @@ export class DbInitProvider {
             //     PressureUlserMin = 100;
             //     PressureUlserMax = dataRange[0];
             // }
-            values = `${values} (${TemperatureMin},${TemperatureMax},${MoistureMin},${MoistureMax},${pressureMin},${pressureMax},${AgeMin},${AgeMax},${WeightMin},${WeightMax},${PressureUlserMin},${PressureUlserMax}),`
-            // console.log(values)
-
+            values = `${values} (${TemperatureMin},${TemperatureMax},${MoistureMin},${MoistureMax},${pressureMin},${pressureMax},${AgeMin},${AgeMax},${WeightMin},${WeightMax},'${PressureUlser}'),`
             if (tables.length != 0) {
                 inserTable(tables, callback)
             } else {
@@ -173,34 +168,58 @@ export class DbInitProvider {
 
         inserTable(data, (response) => {
             response = response.slice(0, -1);
-            let query = `INSERT INTO SensorLookupTable(TemperatureMin,TemperatureMax,MoistureMin,MoistureMax,PressureMin,PressureMax,AgeMin,AgeMax,WeightMin,WeightMax,PressureUlserMin,PressureUlserMax) VALUES ${response}  `
+            // PressureUlserMin,PressureUlserMax
+            let query = `INSERT INTO SensorLookupTable(TemperatureMin,TemperatureMax,MoistureMin,MoistureMax,PressureMin,PressureMax,AgeMin,AgeMax,WeightMin,WeightMax,PressureUlser) VALUES ${response}  `
             console.log("query", query)
-            // this.db.executeSql('query', []).then(() => {
-            // })
-            //     .catch(e => {
-            //         console.log("insert error", e)
-            //         // reject(e);
-            //     });
+            this.db.executeSql(query, []).then((res) => {
+                console.log("Inset lookup", res)
+            })
+                .catch(e => {
+                    console.log("insert error", e)
+                    // reject(e);
+                });
         })
     }
+    checkDataInLookUpTable() {
+        return new Promise((resolve, reject) => {
+            let query = `select * from SensorLookupTable`;
+            this.db.executeSql(query, []).then(res => {
+                console.log("checkDataInLookUpTable", res)
+                if (res.rows.length) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            })
+                .catch(e => {
+                    console.log("insert error", e)
+                    reject(e);
+                });
+        });
+    }
 
-    CreatetimeToPressureUlcerLookup() {
-        let req = new XMLHttpRequest();
-        let jsonData;
-        let url = 'assets/Time_To_PressureUlcer_Lookup/Time_To_PressureUlcer_Lookup.xlsx';
-        req.open("GET", url, true);
-        req.responseType = "arraybuffer";
-        req.onload = (e) => {
-            let data = new Uint8Array(req.response);
-            let workbook = XLSX.read(data, { type: "array" });
-            const wb: XLSX.WorkBook = XLSX.read(data, { type: "array" });
-            const ws: XLSX.WorkSheet = wb.Sheets[wb.SheetNames[0]];
-            jsonData = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
-            jsonData.splice(0, 1)[0]
-            this.insertLookupTables(jsonData)
-
-        };
-        req.send();
+    createPressureUlcerLookup() {
+        this.checkDataInLookUpTable().then(res => {
+            console.log("tttttttttttttt", res)
+            if (!res) {
+                let req = new XMLHttpRequest();
+                let jsonData;
+                let url = 'assets/Time_To_PressureUlcer_Lookup/Time_To_PressureUlcer_Lookup.xlsx';
+                req.open("GET", url, true);
+                req.responseType = "arraybuffer";
+                req.onload = (e) => {
+                    let data = new Uint8Array(req.response);
+                    const wb: XLSX.WorkBook = XLSX.read(data, { type: "array" });
+                    const ws: XLSX.WorkSheet = wb.Sheets[wb.SheetNames[0]];
+                    jsonData = (XLSX.utils.sheet_to_json(ws, { header: 1 }));
+                    jsonData.splice(0, 1)[0];
+                    this.insertLookupTables(jsonData);
+                };
+                req.send();
+            }
+        }).catch(err => {
+            console.log("error=", err);
+        })
     }
 
 

@@ -5,6 +5,7 @@ import { ActionSheetController } from 'ionic-angular';
 import { ToastProvider } from '../../providers/toast/toast';
 import { DbInitProvider } from './../../providers/db-init/db-init';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { query } from '@angular/core/src/render3/instructions';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -44,9 +45,19 @@ export class ProfilePage implements OnInit {
     this.photoViewer.show(this.imageToBeUpload);
   }
 
-  getReading() {
+  evaluatePressure() {
+    let query = `SELECT * FROM SensorLookupTable WHERE ${this.sensoor['temperature']} >= TemperatureMin AND ${this.sensoor['temperature']} <= TemperatureMax AND ${this.sensoor['moisture']} >= MoistureMin AND ${this.sensoor['moisture']} <= MoistureMax AND ${this.sensoor['pressure']} >= PressureMin AND  ${this.sensoor['pressure']} <= PressureMax `
+    this._db.executeQuery(query).then((res: any) => {
+      console.log("evaluatePressure", res)
+    }).catch(e => {
+      console.log("err**evaluatePressure*************", e)
+    })
+  }
 
+
+  getReading() {
     if (this.validateSensoorList()) {
+      this.evaluatePressure();
       // 'AND CreatedTime > 'DATE_SUB(curdate(), INTERVAL 1 DAY)'
       // let query = `SELECT * FROM SensorReadings WHERE UserId=${this.location['UserId']} AND DeviceId='${this.location['DeviceId']}`
       // this._db.executeQuery(query).then((res: any) => {
