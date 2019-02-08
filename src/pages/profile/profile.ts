@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, Row } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ActionSheetController } from 'ionic-angular';
 import { ToastProvider } from '../../providers/toast/toast';
 import { DbInitProvider } from './../../providers/db-init/db-init';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-import { query } from '@angular/core/src/render3/instructions';
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -21,7 +20,18 @@ export class ProfilePage implements OnInit {
   brightness = 0;
   displayNone = true;
   location;
+  errorType = {
+    required: false,
+    limit: false
+  }
+  user = {
+    age: 73,
+    weight: 61
+  }
+  operater = '';
   imageToBeUpload = '';
+  pressureUlser: any = false;
+  reInit = true;
   constructor(public navParams: NavParams,
     private photoViewer: PhotoViewer,
     private camera: Camera,
@@ -44,11 +54,56 @@ export class ProfilePage implements OnInit {
   viewPhoto() {
     this.photoViewer.show(this.imageToBeUpload);
   }
-
+  evaluateValue(data) {
+    console.log("************",data)
+    if (this.operater.length) {
+      if (this.operater == "gt") {
+        if (data > this.pressureUlser) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (data < this.pressureUlser) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } else {
+      if (this.pressureUlser && this.pressureUlser <= data) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    // evaluateValue
+  }
   evaluatePressure() {
-    let query = `SELECT * FROM SensorLookupTable WHERE ${this.sensoor['temperature']} >= TemperatureMin AND ${this.sensoor['temperature']} <= TemperatureMax AND ${this.sensoor['moisture']} >= MoistureMin AND ${this.sensoor['moisture']} <= MoistureMax AND ${this.sensoor['pressure']} >= PressureMin AND  ${this.sensoor['pressure']} <= PressureMax `
+    let query = `SELECT * FROM SensorLookupTable WHERE ${this.sensoor['temperature']} >= TemperatureMin AND ${this.sensoor['temperature']} <= TemperatureMax AND ${this.sensoor['moisture']} >= MoistureMin AND ${this.sensoor['moisture']} <= MoistureMax AND ${this.sensoor['pressure']} >= PressureMin AND  ${this.sensoor['pressure']} <= PressureMax AND ${this.user['age']} >= AgeMin AND  ${this.user['age']} <= AgeMax AND ${this.user['age']} >= WeightMin AND  ${this.user['age']} <= WeightMax `
     this._db.executeQuery(query).then((res: any) => {
-      console.log("evaluatePressure", res)
+      this.reInit = false;
+      if (res.length) {
+        let plessurUlser = res.rows.item(0)
+        console.log("evaluatePressure", plessurUlser, plessurUlser['PressureUlser'])
+        if (plessurUlser['PressureUlser'].indexOf('>') != -1) {
+          let value = plessurUlser['PressureUlser'].split('>');
+          this.pressureUlser = value[1] * 1;
+          this.operater = "gt"
+        } else if (plessurUlser['PressureUlser'].indexOf('<') != -1) {
+          let value = plessurUlser['PressureUlser'].split('<');
+          this.pressureUlser = value[0] * 1;
+          this.operater = "lt"
+        } else {
+          this.pressureUlser = plessurUlser['PressureUlser'];
+        }
+      } else {
+        this.pressureUlser = false;
+      }
+      console.log("OOOOOOOOOOOOOOOOOO",this.operater,this.pressureUlser)
+      setTimeout(() => {
+        this.reInit = true;
+      }, 100)
     }).catch(e => {
       console.log("err**evaluatePressure*************", e)
     })
@@ -82,6 +137,8 @@ export class ProfilePage implements OnInit {
         // }
       }).catch(e => {
         console.log("err***************", e)
+        this._toast.toast(`SensorReadings Entry Fail`, 3000);
+
       })
     } else {
       this._toast.toast(`User Already Set SensorReadings `, 3000);
@@ -99,14 +156,36 @@ export class ProfilePage implements OnInit {
 
   }
 
+  validateEntryOnkeyup(data) {
+    this.errorType.required = false;
+    if (data > 1000) {
+      this.errorType.limit = true;
+    } else {
+      this.errorType.limit = false;
+    }
+  }
+
   validateSensoorList() {
     let isValid = true;
+    let chaeckReq = true;
     Object.keys(this.sensoor).forEach((value) => {
-      if (this.sensoor[value]) {
+      if (!this.sensoor[value]) {
         isValid = false;
+        chaeckReq = false;
+        this.errorType.required = true;
+
+      } else {
+        if (this.sensoor[value] > 1000) {
+          isValid = false;
+        }
       }
     })
-    return !isValid;
+
+    console.log("chaeckReq", chaeckReq)
+    if (chaeckReq) {
+      this.errorType.required = false;
+    }
+    return isValid;
   }
 
   takePicture() {

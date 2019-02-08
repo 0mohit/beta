@@ -81,11 +81,11 @@ export class DbInitProvider {
             } else if (firstRecord[0].indexOf('>') != -1) {
                 let dataRange = firstRecord[0].split('>');
                 TemperatureMin = dataRange[1];
-                TemperatureMax = 100;
+                TemperatureMax = 1000;
             } else {
                 let dataRange = firstRecord[0].split('<');
-                TemperatureMin = 100;
-                TemperatureMax = dataRange[0];
+                TemperatureMin = 0;
+                TemperatureMax = dataRange[1];
             }
 
             if (firstRecord[1].indexOf('-') != -1) {
@@ -95,11 +95,11 @@ export class DbInitProvider {
             } else if (firstRecord[1].indexOf('>') != -1) {
                 let dataRange = firstRecord[1].split('>');
                 MoistureMin = dataRange[1];
-                MoistureMax = 100;
+                MoistureMax = 1000;
             } else {
                 let dataRange = firstRecord[1].split('<');
-                MoistureMin = 100;
-                MoistureMax = dataRange[0];
+                MoistureMin = 0;
+                MoistureMax = dataRange[1];
             }
 
             if (firstRecord[2].indexOf('-') != -1) {
@@ -109,11 +109,11 @@ export class DbInitProvider {
             } else if (firstRecord[2].indexOf('>') != -1) {
                 let dataRange = firstRecord[2].split('>');
                 pressureMin = dataRange[1];
-                pressureMax = 100;
+                pressureMax = 1000;
             } else {
                 let dataRange = firstRecord[2].split('<');
-                pressureMin = 100;
-                pressureMax = dataRange[0];
+                pressureMin = 0;
+                pressureMax = dataRange[1];
             }
 
             if (firstRecord[3].indexOf('-') != -1) {
@@ -123,11 +123,11 @@ export class DbInitProvider {
             } else if (firstRecord[3].indexOf('>') != -1) {
                 let dataRange = firstRecord[3].split('>');
                 AgeMin = dataRange[1];
-                AgeMax = 100;
+                AgeMax = 1000;
             } else {
                 let dataRange = firstRecord[3].split('<');
-                AgeMin = 100;
-                AgeMax = dataRange[0];
+                AgeMin = 0;
+                AgeMax = dataRange[1];
             }
 
             if (firstRecord[4].indexOf('-') != -1) {
@@ -137,26 +137,13 @@ export class DbInitProvider {
             } else if (firstRecord[4].indexOf('>') != -1) {
                 let dataRange = firstRecord[4].split('>');
                 WeightMin = dataRange[1];
-                WeightMax = 100;
+                WeightMax = 1000;
             } else {
                 let dataRange = firstRecord[4].split('<');
-                WeightMin = 100;
-                WeightMax = dataRange[0];
+                WeightMin = 1000;
+                WeightMax = dataRange[1];
             }
             PressureUlser = firstRecord[5];
-            // if (firstRecord[5].indexOf('-') != -1) {
-            //     let dataRange = firstRecord[5].split('-');
-            //     PressureUlserMin = dataRange[0];
-            //     PressureUlserMax = dataRange[1];
-            // } else if (firstRecord[5].indexOf('>') != -1) {
-            //     let dataRange = firstRecord[5].split('>');
-            //     PressureUlserMin = dataRange[1];
-            //     PressureUlserMax = 0;
-            // } else {
-            //     let dataRange = firstRecord[5].split('<');
-            //     PressureUlserMin = 100;
-            //     PressureUlserMax = dataRange[0];
-            // }
             values = `${values} (${TemperatureMin},${TemperatureMax},${MoistureMin},${MoistureMax},${pressureMin},${pressureMax},${AgeMin},${AgeMax},${WeightMin},${WeightMax},'${PressureUlser}'),`
             if (tables.length != 0) {
                 inserTable(tables, callback)
@@ -200,7 +187,6 @@ export class DbInitProvider {
 
     createPressureUlcerLookup() {
         this.checkDataInLookUpTable().then(res => {
-            console.log("tttttttttttttt", res)
             if (!res) {
                 let req = new XMLHttpRequest();
                 let jsonData;

@@ -49,7 +49,7 @@
             Temperature :
           </ion-col>
           <ion-col col-3>
-            <input placeholder="0" [(ngModel)]="sensoor.temperature" type="number">
+            <input placeholder="0" [(ngModel)]="sensoor.temperature" type="number" (keyup)="validateEntryOnkeyup(sensoor.temperature)">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -59,7 +59,7 @@
             Moisture :
           </ion-col>
           <ion-col col-3>
-            <input placeholder="0" [(ngModel)]="sensoor.moisture" type="number">
+            <input placeholder="0" [(ngModel)]="sensoor.moisture" type="number" (keyup)="validateEntryOnkeyup(sensoor.moisture)">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -71,7 +71,7 @@
             Pressure :
           </ion-col>
           <ion-col col-3>
-            <input type="number" placeholder="0" [(ngModel)]="sensoor.pressure">
+            <input type="number" placeholder="0" [(ngModel)]="sensoor.pressure" (keyup)="validateEntryOnkeyup(sensoor.pressure)">
           </ion-col>
         </ion-row>
       </ion-col>
@@ -80,7 +80,12 @@
       </ion-col> -->
     </ion-row>
   </ion-grid>
-
+  <div padding margin-left class="red" *ngIf="this.errorType.required">
+    Sensor reading records are mandatory
+  </div>
+  <div padding margin-left class="red" *ngIf="this.errorType.limit">
+    Sensor reading records can not be more then 1000
+  </div>
   <ion-list-header class="theamColor" no-margin> Skin condition </ion-list-header>
   <div class="border-header"></div>
 
@@ -101,8 +106,9 @@
       <ion-col> -->
     <ion-row>
       <ion-col style="padding-right:0px;" padding-top class="font1" col-5>
-        Skin condition <ion-badge style="border: 0px solid white;
-            border-radius: 10px;" item-end>{{brightness}}</ion-badge>
+        Skin condition <ion-badge class=" white" style="border: 0px solid white;
+            border-radius: 10px;"
+          item-end>{{brightness}}</ion-badge>
       </ion-col>
       <ion-col col-7>
         <ion-item style="padding-left:5px;" no-lines class="backgroung-skyBlue">
@@ -123,12 +129,12 @@
         <ion-col no-padding col-5 style="padding-top: 3px;">
           Pressure Ulcer in (Hrs)
         </ion-col>
-        <ion-col no-padding col-7>
-          <ion-badge color="danger">12</ion-badge>
-          <ion-badge color="danger">24</ion-badge>
-          <ion-badge color="danger">36</ion-badge>
-          <ion-badge color="danger">48</ion-badge>
-          <ion-badge color="danger">72</ion-badge>
+        <ion-col no-padding col-7 *ngIf="reInit">
+          <ion-badge color="danger" [ngClass]="{white: evaluateValue(12)}">12</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white:evaluateValue(24)}">24</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white:evaluateValue(36)}">36</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white:evaluateValue(48)}">48</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white:evaluateValue(72)}">72</ion-badge>
         </ion-col>
       </ion-row>
     </ion-grid>
