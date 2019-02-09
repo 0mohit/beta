@@ -54,45 +54,21 @@ export class ProfilePage implements OnInit {
   viewPhoto() {
     this.photoViewer.show(this.imageToBeUpload);
   }
-  evaluateValue(data) {
-    console.log("************",data)
-    if (this.operater.length) {
-      if (this.operater == "gt") {
-        if (data > this.pressureUlser) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        if (data < this.pressureUlser) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    } else {
-      if (this.pressureUlser && this.pressureUlser <= data) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    // evaluateValue
-  }
+
   evaluatePressure() {
-    let query = `SELECT * FROM SensorLookupTable WHERE ${this.sensoor['temperature']} >= TemperatureMin AND ${this.sensoor['temperature']} <= TemperatureMax AND ${this.sensoor['moisture']} >= MoistureMin AND ${this.sensoor['moisture']} <= MoistureMax AND ${this.sensoor['pressure']} >= PressureMin AND  ${this.sensoor['pressure']} <= PressureMax AND ${this.user['age']} >= AgeMin AND  ${this.user['age']} <= AgeMax AND ${this.user['age']} >= WeightMin AND  ${this.user['age']} <= WeightMax `
+    let query = `SELECT * FROM SensorLookupTable WHERE ${this.sensoor['temperature']} >= TemperatureMin AND ${this.sensoor['temperature']} <= TemperatureMax AND ${this.sensoor['moisture']} >= MoistureMin AND ${this.sensoor['moisture']} <= MoistureMax AND ${this.sensoor['pressure']} >= PressureMin AND  ${this.sensoor['pressure']} <= PressureMax AND ${this.user.age} >= AgeMin AND  ${this.user.age} <= AgeMax AND ${this.user.weight} >= WeightMin AND  ${this.user.weight} <= WeightMax `
     this._db.executeQuery(query).then((res: any) => {
       this.reInit = false;
-      if (res.length) {
-        let plessurUlser = res.rows.item(0)
-        console.log("evaluatePressure", plessurUlser, plessurUlser['PressureUlser'])
+      let plessurUlser = res.rows.item(0);
+      if (plessurUlser && plessurUlser.Id) {
+        console.log("evaluatePressure", plessurUlser, plessurUlser['PressureUlser']);
         if (plessurUlser['PressureUlser'].indexOf('>') != -1) {
           let value = plessurUlser['PressureUlser'].split('>');
           this.pressureUlser = value[1] * 1;
-          this.operater = "gt"
+          this.operater = "gt";
         } else if (plessurUlser['PressureUlser'].indexOf('<') != -1) {
           let value = plessurUlser['PressureUlser'].split('<');
-          this.pressureUlser = value[0] * 1;
+          this.pressureUlser = value[1] * 1;
           this.operater = "lt"
         } else {
           this.pressureUlser = plessurUlser['PressureUlser'];
@@ -100,10 +76,10 @@ export class ProfilePage implements OnInit {
       } else {
         this.pressureUlser = false;
       }
-      console.log("OOOOOOOOOOOOOOOOOO",this.operater,this.pressureUlser)
       setTimeout(() => {
         this.reInit = true;
       }, 100)
+      console.log("this.pressureUlser", this.pressureUlser)
     }).catch(e => {
       console.log("err**evaluatePressure*************", e)
     })
@@ -119,10 +95,8 @@ export class ProfilePage implements OnInit {
       // if (res.rows.length == 0) {
       let date = new Date();
       let query = `INSERT INTO SensorReadings(UserId ,DeviceId,Temperature, Moisture ,Pressure ,MediaUrl,SkinCondition,CreatedTime,UpdatedTime) VALUES  (${this.location['UserId']},'${this.location['DeviceId']}','${this.sensoor['temperature']}','${this.sensoor['moisture']}','${this.sensoor['pressure']}','${this.imageToBeUpload}',${this.brightness},'${date}','${date}')`
-      console.log("query", query)
       this._db.executeQuery(query).then((res: any) => {
         this.displayNone = false;
-        console.log("***", res)
         // if (res.rows.length) {
         this.sensoor = {
           temperature: null,

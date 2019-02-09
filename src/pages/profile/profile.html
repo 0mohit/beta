@@ -130,11 +130,11 @@
           Pressure Ulcer in (Hrs)
         </ion-col>
         <ion-col no-padding col-7 *ngIf="reInit">
-          <ion-badge color="danger" [ngClass]="{white: evaluateValue(12)}">12</ion-badge>
-          <ion-badge color="danger" [ngClass]="{white:evaluateValue(24)}">24</ion-badge>
-          <ion-badge color="danger" [ngClass]="{white:evaluateValue(36)}">36</ion-badge>
-          <ion-badge color="danger" [ngClass]="{white:evaluateValue(48)}">48</ion-badge>
-          <ion-badge color="danger" [ngClass]="{white:evaluateValue(72)}">72</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white: operater.length ? operater == 'gt' ? 12 > pressureUlser ? true : false : 12 < pressureUlser ? true : false  : pressureUlser && pressureUlser >= 12 ? true : false}">12</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white: operater.length ? operater == 'gt' ? 24 > pressureUlser ? true : false : 24 < pressureUlser ? true : false  : pressureUlser && pressureUlser >= 24 ? true : false}">24</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white: operater.length ? operater == 'gt' ? 36 > pressureUlser ? true : false : 36 < pressureUlser ? true : false  : pressureUlser && pressureUlser >= 36 ? true : false}">36</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white: operater.length ? operater == 'gt' ? 48 > pressureUlser ? true : false : 48 < pressureUlser ? true : false  : pressureUlser && pressureUlser >= 48 ? true : false}">48</ion-badge>
+          <ion-badge color="danger" [ngClass]="{white: operater.length ? operater == 'gt' ? 72 > pressureUlser ? true : false : 72 < pressureUlser ? true : false  : pressureUlser && pressureUlser >= 72 ? true : false}">72</ion-badge>
         </ion-col>
       </ion-row>
     </ion-grid>

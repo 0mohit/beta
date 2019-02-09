@@ -157,11 +157,12 @@ export class DbInitProvider {
             response = response.slice(0, -1);
             // PressureUlserMin,PressureUlserMax
             let query = `INSERT INTO SensorLookupTable(TemperatureMin,TemperatureMax,MoistureMin,MoistureMax,PressureMin,PressureMax,AgeMin,AgeMax,WeightMin,WeightMax,PressureUlser) VALUES ${response}  `
-            console.log("query", query)
             this.db.executeSql(query, []).then((res) => {
                 console.log("Inset lookup", res)
+                alert("insert")
             })
                 .catch(e => {
+                    alert("erooooooooooooooooooo")
                     console.log("insert error", e)
                     // reject(e);
                 });
